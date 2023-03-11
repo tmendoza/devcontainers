@@ -8,3 +8,6 @@ $ qemu-img.exe create -f qcow2 ubuntu-18.04-disk.qcow 10G
 $ qemu-system-x86_64.exe -boot d -cdrom .\ubuntu-18.04.6-desktop-amd64.iso -m 4096 -hda .\ubuntu-18.04-disk.qcow
 ```
 
+## Prepping Windows for Containers
+
+https://learn.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment?tabs=dockerce
