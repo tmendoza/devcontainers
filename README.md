@@ -16,11 +16,14 @@ build, easy to modify and easy to maintain over long periods of time.
 
 # Directory Structure
  /manifests - This directory contains the manifests (Dockerfiles) for building the docker containers.  There will be 
- one manifest per development environment type.  For example:
+ one manifest per development environment type. 
 
-VSCode/
-    - Machine-Learning-PyTorch-Python-3.11-noenv-Linux-Alpine-SMALL.dockerfile 
-    - Machine-Learning-TensorFlow-Python-3.11-noenv-Linux-Alpine-BIG.dockerfile 
-    - Desktop-GUI-PyQT5-Python-3.11-venv-Linux-Void-ALL.dockerfile 
+There will be subdirectories, each containing Dockerfiles for specific IDE's.
+
+## VSCode
+
+* Machine-Learning-PyTorch-Python-3.11-noenv-Linux-Alpine-SMALL.dockerfile 
+* Machine-Learning-TensorFlow-Python-3.11-noenv-Linux-Alpine-BIG.dockerfile 
+* Desktop-GUI-PyQT5-Python-3.11-venv-Linux-Void-ALL.dockerfile 
 
 
