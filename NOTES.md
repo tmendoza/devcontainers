@@ -22,7 +22,7 @@ docker build -t ubuntu-python3.11 -f .\Dockerfile .
 https://medium.com/geekculture/run-a-gui-software-inside-a-docker-container-dce61771f9
 https://www.youtube.com/watch?v=BDilFZ9C9mw
 
-## Displaying GUI's requires an X11 server
+## Displaying GUI's on Windows 10 requires an X11 server
 
 https://sourceforge.net/projects/vcxsrv/
 
