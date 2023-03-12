@@ -25,5 +25,7 @@ There will be subdirectories, each containing Dockerfiles for specific IDE's.
 * Machine-Learning-PyTorch-Python-3.11-noenv-Linux-Alpine-SMALL.dockerfile 
 * Machine-Learning-TensorFlow-Python-3.11-noenv-Linux-Alpine-BIG.dockerfile 
 * Desktop-GUI-PyQT5-Python-3.11-venv-Linux-Void-ALL.dockerfile 
+* Desktop-GUI-SimpleGUI-Python-3.10-noenv-Linux-Ubuntu-ALL.dockerfile 
+
 
 
