@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu
 
 ENV DEBIAN_FRONTEND=noninteractive 
 
@@ -43,10 +43,8 @@ RUN pip3.10 install opencv-python-headless
 
 #RUN pip3.10 install pysimplegui
 RUN pip3.10 install -U PySide6
-RUN mkdir -p /home/devuser
+RUN test -d /home/vscode || mkdir -p /home/vscode
 
-ADD ./python/main-pyside6-test.py /home/devuser/
+ADD ./python/main-pyside6-test.py /home/vscode/
 
 ENV DISPLAY=host.docker.internal:0.0 
-
-CMD /usr/bin/python /home/devuser/main-pyside6-test.py
