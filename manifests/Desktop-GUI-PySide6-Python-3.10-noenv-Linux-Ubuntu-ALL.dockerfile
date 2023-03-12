@@ -15,7 +15,9 @@ RUN apt-get install ffmpeg -y
 RUN apt-get install libgl1 -y
 RUN apt-get install libsm6 -y 
 RUN apt-get install libxext6 -y
+RUN apt-get install libegl-dev -y 
 RUN apt-get install wget -y
+RUN apt install qt6-base-dev -y
 
 # Install the following packages
 RUN apt-get update
@@ -36,6 +38,9 @@ RUN python3.10 -m pip install --upgrade pip
 # Install any Python modules required in the notebook
 RUN pip3.10 install pandas
 RUN pip3.10 install numpy 
+RUN pip3.10 uninstall opencv-python
+RUN pip3.10 install opencv-python-headless
+
 #RUN pip3.10 install pysimplegui
 RUN pip3.10 install -U PySide6
 RUN mkdir -p /home/devuser
