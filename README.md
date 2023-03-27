@@ -8,7 +8,7 @@ This repository contains a collection of tools for building LXD containers, purp
 
 > application containers run a single app/process, whereas system containers run a full operating system giving them flexibility for the workload types they support.  [LXD vs Docker](https://ubuntu.com/blog/lxd-vs-docker)
 
-LXD manages system containers.  Unlike Docker, which manages Application containers, system containers are more like traditional virtual machines.  They come with a whole system and also can host several  applications.  As a developer, I don't need just one application.  I need a whole suite of applications and using a system container better fits more working model of development environments.  I started down the Docker road, but it became too unwieldy and their recent licensing changes make it difficult to depend on them.  LXD seems to fit best when considering my circumstances and personal proclivities.
+LXD manages system containers.  Unlike Docker, which manages Application containers, system containers are more like traditional virtual machines.  They come with a whole system and also can host several  applications.  As a developer, I don't need just one application.  I need a whole suite of applications and using a system container better fits my typical working model of development environments.  I started down the Docker road, but it became too unwieldy and their recent licensing changes make it difficult to depend on them.  LXD seems to fit best when considering my circumstances and personal proclivities.
 
 ## Directory Structure
 
