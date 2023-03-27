@@ -134,16 +134,6 @@ When you create a new container using the 'lxc launch' command, the lxd download
 
 `
 $ lxc list
-+-------------------------+---------+----------------------+------+-----------+-----------+
-|          NAME           |  STATE  |         IPV4         | IPV6 |   TYPE    | SNAPSHOTS |
-+-------------------------+---------+----------------------+------+-----------+-----------+
-| python-3-11-desktop     | RUNNING | 10.209.29.252 (eth0) |      | CONTAINER | 0         |
-+-------------------------+---------+----------------------+------+-----------+-----------+
-| ubuntu-22-04-python3-10 | RUNNING | 10.209.29.96 (eth0)  |      | CONTAINER | 0         |
-+-------------------------+---------+----------------------+------+-----------+-----------+
-| ubuntu-22-04-python3-11 | STOPPED |                      |      | CONTAINER | 0         |
-+-------------------------+---------+----------------------+------+-----------+-----------+
-
 `
 
 As you can see, I have two existing containers within my desktop machines LXD database.  One is running and the other one is stopped.  You can also see the one we just created.  It is running and is accessible.  But before we 'login' to your new container, lets delete the old ones listed above.
