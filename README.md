@@ -107,54 +107,7 @@ AS part of the initialization process you will be asked a series of questions.  
 ### Manage container instances
 Now that LXD is installed, we want to start creating our own custom container images and start them up to do some work.  To do this, the LXD suite of tools comes with a command line tool called 'lxc'.
 
-LXC is a CLI tool for managing the lifecycle of some type of container.  For example, using the LXC command you can do the following:
-
-`
-$ lxc
-Description:
-  Command line client for LXD
-
-  All of LXD's features can be driven through the various commands below.
-  For help with any of those, simply call them with --help.
-
-Usage:
-  lxc [command]
-
-Available Commands:
-  alias       Manage command aliases
-  cluster     Manage cluster members
-  config      Manage instance and server configuration options
-  console     Attach to instance consoles
-  copy        Copy instances within or in between LXD servers
-  delete      Delete instances and snapshots
-  exec        Execute commands in instances
-  export      Export instance backups
-  file        Manage files in instances
-  help        Help about any command
-  image       Manage images
-  import      Import instance backups
-  info        Show instance or server information
-  launch      Create and start instances from images
-  list        List instances
-  move        Move instances within or in between LXD servers
-  network     Manage and attach instances to networks
-  operation   List, show and delete background operations
-  profile     Manage profiles
-  project     Manage projects
-  publish     Publish instances as images
-  remote      Manage the list of remote servers
-  rename      Rename instances and snapshots
-  restart     Restart instances
-  restore     Restore instances from snapshots
-  snapshot    Create instance snapshots
-  start       Start instances
-  stop        Stop instances
-  storage     Manage storage pools and volumes
-  version     Show local and remote versions
-  warning     Manage warnings
-`
-
-We are not going to cover all of these items.  We will concern ourselves with '5' main tools:
+LXC is a CLI tool for managing the lifecycle of some type of container.  We are not going to cover all of it's capabilities.  We will concern ourselves with '8' main tools:
 
 * lxc launch
 * lxc list
