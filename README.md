@@ -4,26 +4,50 @@ My repository of special purpose desktop development vscode containers
 # Description
 This repository contains a collection of tools for building LXD containers, purpose built, for software development. Since I do development in many different languages and on many different platforms (LISP, Python, Go, Rust, C, C++, Plan9, STM32 embedded, etc), containers are a great way for managing a programming language's tooling ecosystem without polluting your base host machine.
 
+# Table of Contents
+[Reasons for LXC/LXD vs Docker](link)
+
+[Repository Structure](link)
+  * [Python](link)
+  * [Manifests](link)
+
+[Installation](link)
+  * [Prerequisites](link)
+  * [Install LXD](link)
+  * [Initialize LXD](link)
+
+[Operations](link)
+  * [Manage container instances](link)
+    - [How do I launching a new container?](link)
+    - [How do I list all of my container instances?](link)
+    - [How do I stop a running container?](link)
+    - [How do I start an container instance?](link)
+    - [How do I delete an container instance?](link)
+    - [How do I login to my new container?](link)
+  * [Customizing Container instances](link)
+    - [How do I build a Python 3.11 GUI Development environment with PySide 6, PySimpleGUI and VS Code](link)
+    - [How do you launch Visual Studio Code from inside a container?](link)
+
 ## Reasons for LXC/LXD vs Docker
 
 > application containers run a single app/process, whereas system containers run a full operating system giving them flexibility for the workload types they support.  [LXD vs Docker](https://ubuntu.com/blog/lxd-vs-docker)
 
 LXD manages system containers.  Unlike Docker, which manages Application containers, system containers are more like traditional virtual machines.  They come with a whole system and also can host several  applications.  As a developer, I don't need just one application.  I need a whole suite of applications and using a system container better fits my typical working model of development environments.  I started down the Docker road, but it became too unwieldy and their recent licensing changes make it difficult to depend on them.  LXD seems to fit best when considering my circumstances and personal proclivities.
 
-## Directory Structure
+## Repository Structure
 
-- **/manifests** This directory contains the shell scripts for building the LXD system containers.  There will be one shell scripts per development environment type. 
+### **/python** This directory contains some example python scripts that can be copied over to a running container to test whether python is operating as expected.  
 
-- **/python** This directory contains some example python scripts that can be copied over to a running container to test whether python is operating as expected.  
+### **/manifests** This directory contains the shell scripts for building the LXD system containers.  There will be one shell scripts per development environment type. 
 
 There will be subdirectories, each containing Dockerfiles for specific IDE's.
 
-### /manifests/vscode - VSCode Environments
+#### /manifests/vscode - VSCode Environments
 
 * Desktop-GUI-Python-3.10-VSCode-Linux-Ubuntu-ALL.sh 
 * Desktop-GUI-Python-3.11-VSCode-Linux-Ubuntu-ALL.sh 
 
-### /manifests/neovim - Neo Vim Environments
+#### /manifests/neovim - Neo Vim Environments
 
 * None yet
 
@@ -102,7 +126,7 @@ Now lets install the LXD binaries using the 'snap' command
 sudo snap install lxd
 ```
 
-#### Initialize LXD 
+### Initialize LXD 
 Before you can create an LXD instance, you will need to initialize the system.  To do this we run the command 'lxd init'
 
 ```bash
@@ -111,6 +135,7 @@ sudo lxd init
 
 As part of the initialization process you will be asked a series of questions.  You should accept the deaults for all of the questions with the exception of the "Storage Pools" section.   Here you will want to select 'zfs'
 
+## Operations
 ### Manage container instances
 Now that LXD is installed, we want to start creating our own custom container images and start them up to do some work.  To do this, the LXD suite of tools comes with a command line tool called 'lxc'.
 
@@ -123,7 +148,7 @@ LXC is a CLI tool for managing the lifecycle of some type of container.  We are 
 * lxc exec
 * lxc delete 
 
-#### Launching a new container
+#### How do I launching a new container?
 To launch a new container we use the 'lxc launch' command.  If I wanted to create a new Ubuntu Jammy/22.04 based container and call it "python-3-11-desktop" then I would use the following command with output:
 
 
@@ -145,7 +170,7 @@ lxc list -f csv
 python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0 
 ```
 
-#### How do I stop a running container
+#### How do I stop a running container?
 First get the name of the container you want to stop
 
 ```bash
@@ -375,7 +400,7 @@ Use "lxc [command] --help" for more information about a command.
 
 To get the help you need.  
 
-### How do I build a Python 3.11 GUI Development environment with PySide 6, PySimpleGUI and VS Code
+#### How do I build a Python 3.11 GUI Development environment with PySide 6, PySimpleGUI and VS Code
 First make sure LXD is installed and configured properly.  If you have run through the instructions above, you should be able to determine if LXD and any LXD instances are installed, up and running.
 
 After ensuring LXD is installed, you should be able to execute the various scripts in the **/manifest** directories within this repository.  In this specific use-case we are trying to construct a container instance designed for doing Python GUI development using PySimpleGUI or PySide 6.  In this scenario, we also require Python version 3.11 and also require Visual Studio code be installed as the editor.
@@ -453,7 +478,7 @@ lxc exec $ENVNAME --env DISPLAY=:1 --env HOME=/home/ubuntu --user 1000 -- bash -
 ubuntu@ubuntu-22-04-python3-11:~$ 
 ```
 
-# How do you launch Visual Studio Code from inside a container?
+#### How do you launch Visual Studio Code from inside a container?
 First lets login to your running container
 
 ```bash
