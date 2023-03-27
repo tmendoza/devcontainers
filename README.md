@@ -136,6 +136,9 @@ When you create a new container using the 'lxc launch' command, the lxd download
 
 `
 $ lxc list -f csv
+`
+
+`
 python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0 
 `
 
@@ -144,8 +147,12 @@ First get the name of the container you want to stop
 
 `
 $ lxc list -f csv
+`
+
+`
 python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0 
 `
+
 The name is the data in the first column.  The value is 'python-3-11-desktop'.  That is the name we will use going forward.
 
 To stop a running container we use the 'lxc stop' command
@@ -158,6 +165,9 @@ Now lets list the container database to check on the status of the container we 
 
 `
 $ lxc list -f csv
+`
+
+`
 python-3-11-desktop,STOPPED,,,CONTAINER,0
 `
 
@@ -168,6 +178,9 @@ Well first lets check on the status of the existing container instances
 
 `
 $ lxc list -f csv
+`
+
+`
 python-3-11-desktop,STOPPED,,,CONTAINER,0
 `
 
@@ -181,6 +194,9 @@ Now lets list the contents of the LXD database to see what the status of the con
 
 `
 $ lxc list -f csv
+`
+
+`
 python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0
 `
 
@@ -197,6 +213,7 @@ python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0
 `
 
 We see that it is running.  As mentioned above, to delete a container it must first be stopped.  Lets stop this running container
+
 
 `
 $ lxc stop python-3-11-desktop
