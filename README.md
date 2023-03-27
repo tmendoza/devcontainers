@@ -123,6 +123,8 @@ To launch a new container we use the 'lxc launch' command.  If I wanted to creat
 
 ```
 $ lxc launch ubuntu:22.04 python-3-11-desktop
+```
+```
 Creating python-3-11-desktop
 Starting python-3-11-desktop
 ```
@@ -132,6 +134,8 @@ When you create a new container using the 'lxc launch' command, LXD downloads th
 
 ```
 $ lxc list -f csv
+```
+```
 python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0 
 ```
 
@@ -140,6 +144,8 @@ First get the name of the container you want to stop
 
 ```
 $ lxc list -f csv
+```
+```
 python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0 
 ```
 
@@ -155,6 +161,8 @@ Now lets list the container database to check on the status of the container we 
 
 ```
 $ lxc list -f csv
+```
+```
 python-3-11-desktop,STOPPED,,,CONTAINER,0
 ```
 
@@ -165,6 +173,8 @@ Well first lets check on the status of the existing container instances
 
 ```
 $ lxc list -f csv
+```
+```
 python-3-11-desktop,STOPPED,,,CONTAINER,0
 ```
 
@@ -178,6 +188,8 @@ Now lets list the contents of the LXD database to see what the status of the con
 
 ```
 $ lxc list -f csv
+```
+```
 python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0
 ```
 
@@ -190,6 +202,8 @@ First lets see what is currently running
 
 ```
 $ lxc list -f csv
+```
+```
 python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0
 ```
 
@@ -247,7 +261,7 @@ To make modifications to a container you use the 'lxc exec' command.  Why?  Beca
 
 Now to do this normally you can run command either from a shell on the host, or you can also script this so you don't have to type it all over again in case you wanted to rebuild your environment from scratch.  As a matter of fact, the 'manifests' directory of this repository contains folders of shell scripts for building custom LXD Containers.  Here is an example:
 
-```
+```bash
 #!/bin/bash
 
 ENVNAME="ubuntu-22-04-python3-10"
