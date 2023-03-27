@@ -18,15 +18,15 @@ This repository contains a collection of tools for building LXD containers, purp
 
 [Operations](https://github.com/tmendoza/devcontainers#operations)
   * [Manage container instances](https://github.com/tmendoza/devcontainers#manage-container-instances)
-    - [How do I launch a container?](https://github.com/tmendoza/devcontainers#how-do-i-launching-a-new-container)
-    - [How do I list all of my container instances?](link)
-    - [How do I stop a running container?](link)
-    - [How do I start an container instance?](link)
-    - [How do I delete an container instance?](link)
-    - [How do I login to my new container?](link)
-  * [Customizing Container instances](link)
-    - [How do I build a Python 3.11 GUI Development environment with PySide 6, PySimpleGUI and VS Code](link)
-    - [How do you launch Visual Studio Code from inside a container?](link)
+    - [How do I launch a container?](https://github.com/tmendoza/devcontainers#how-do-i-launch-a-container)
+    - [How do I list all of my container instances?](https://github.com/tmendoza/devcontainers#how-do-i-list-all-of-my-container-instances)
+    - [How do I stop a running container?](https://github.com/tmendoza/devcontainers#how-do-i-stop-a-running-container)
+    - [How do I start an 'lxd' container instance?](https://github.com/tmendoza/devcontainers#how-do-i-start-an-lxd-container-instance)
+    - [How do I delete an 'lxd' container instance?](https://github.com/tmendoza/devcontainers#how-do-i-delete-an-lxd-container-instance)
+    - [How do I login to my new container?](https://github.com/tmendoza/devcontainers#how-do-i-login-to-my-new-container)
+  * [Customizing Container instances](https://github.com/tmendoza/devcontainers#customizing-container-images)
+    - [How do I build a Python 3.11 GUI Development environment with PySide 6, PySimpleGUI and VS Code](https://github.com/tmendoza/devcontainers#how-do-i-build-a-python-311-gui-development-environment-with-pyside-6-pysimplegui-and-vs-code)
+    - [How do you launch Visual Studio Code from inside a container?](https://github.com/tmendoza/devcontainers#how-do-you-launch-visual-studio-code-from-inside-a-container)
 
 ## Reasons for LXC/LXD vs Docker
 
