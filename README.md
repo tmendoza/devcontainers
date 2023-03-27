@@ -8,17 +8,17 @@ This repository contains a collection of tools for building LXD containers, purp
 [Reasons for LXC/LXD vs Docker](https://github.com/tmendoza/devcontainers#reasons-for-lxclxd-vs-docker)
 
 [Repository Structure](https://github.com/tmendoza/devcontainers#repository-structure)
-  * [Python](https://github.com/tmendoza/devcontainers#python-this-directory-contains-some-example-python-scripts-that-can-be-copied-over-to-a-running-container-to-test-whether-python-is-operating-as-expected)
-  * [Manifests](link)
+  * [Python](https://github.com/tmendoza/devcontainers#python)
+  * [Manifests](https://github.com/tmendoza/devcontainers#manifests)
 
-[Installation](link)
-  * [Prerequisites](link)
-  * [Install LXD](link)
-  * [Initialize LXD](link)
+[Installation](https://github.com/tmendoza/devcontainers#installation)
+  * [Prerequisites](https://github.com/tmendoza/devcontainers#prerequisites)
+  * [Install LXD](https://github.com/tmendoza/devcontainers#install-lxd)
+  * [Initialize LXD](https://github.com/tmendoza/devcontainers#initialize-lxd)
 
-[Operations](link)
-  * [Manage container instances](link)
-    - [How do I launching a new container?](link)
+[Operations](https://github.com/tmendoza/devcontainers#operations)
+  * [Manage container instances](https://github.com/tmendoza/devcontainers#manage-container-instances)
+    - [How do I launch a container?](https://github.com/tmendoza/devcontainers#how-do-i-launching-a-new-container)
     - [How do I list all of my container instances?](link)
     - [How do I stop a running container?](link)
     - [How do I start an container instance?](link)
@@ -150,7 +150,7 @@ LXC is a CLI tool for managing the lifecycle of some type of container.  We are 
 * lxc exec
 * lxc delete 
 
-#### How do I launching a new container?
+#### How do I launch a container?
 To launch a new container we use the 'lxc launch' command.  If I wanted to create a new Ubuntu Jammy/22.04 based container and call it "python-3-11-desktop" then I would use the following command with output:
 
 
