@@ -74,10 +74,18 @@ $ cd $HOME/dev/repos
 
 ###### Next checkout the 'devcontainers' repository hosted on GitHub
 `
-git clone https://github.com/tmendoza/devcontainers.git
+$ git clone https://github.com/tmendoza/devcontainers.git
 `
 
+At this point you should have everything you need to begin the installation of LXD
 
 ### Install LXD
+Installing LXD is pretty straightforward on an Ubuntu system  To install LXD you will install what is called a Snap.  So what is a snap?  Well a [snap](https://ubuntu.com/core/services/guide/snaps-intro) is just a containerized version of a software application.  See!  Even the Linux distributors are doing what we are attempting to do here.  They are creating packaged environments for specific applications.  
+
+This is a more narrow use-case than LXD containers.  Snap containers are more like Docker containers in that they package up just an application and all of it's dependencies.  It is not a whole system like an LXD container or LXD Virtual machine.  You can think of these different virtualization technologies as existing on a spectrum of virtualization.  To the far left you have small virtual environments and on the far right you have more heavy weight virtual environments
+
+| Small | Medium | Large | X-Large |
+| ----- | ------ | ----- | ------- |
+| snap  | docker | lxd   | vm      |
 
 
