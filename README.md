@@ -92,16 +92,16 @@ This is a more narrow use-case than LXD containers.  Snap containers are more li
 
 #### Install the LXD binaries
 
-`
+```bash
 $ sudo snap install lxd
-`
+```
 
 #### Initialize LXD 
 Before you can create an LXD instance, you will need to initialize the system.  To do this we run the command 'lxd init'
 
-`
+```bash
 $ sudo lxd init
-`
+```
 
 AS part of the initialization process you will be asked a series of questions.  You should accept the deaults for all of the questions with the exception of the "Storage Pools" section.   Here you will want to select 'zfs'
 
@@ -121,83 +121,65 @@ LXC is a CLI tool for managing the lifecycle of some type of container.  We are 
 To launch a new container we use the 'lxc launch' command.  If I wanted to create a new Ubuntu Jammy/22.04 based container and call it "python-3-11-desktop" then I would use the following command with output:
 
 
-`
+```
 $ lxc launch ubuntu:22.04 python-3-11-desktop
-`
-
-`
 Creating python-3-11-desktop
 Starting python-3-11-desktop
-`
+```
 
 #### How do I list all of my container instances?
 When you create a new container using the 'lxc launch' command, LXD downloads the ubuntu images and stores it and it's configuration in the LXD database.  But how do you view the status of your containers?  Using the 'lxc list' command you can list all of the containers you have built. 
 
-`
+```
 $ lxc list -f csv
-`
-
-`
 python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0 
-`
+```
 
 #### How do I stop a running container
 First get the name of the container you want to stop
 
-`
+```
 $ lxc list -f csv
-`
-
-`
 python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0 
-`
+```
 
 The name is the data in the first column.  The value is 'python-3-11-desktop'.  That is the name we will use going forward.
 
 To stop a running container we use the 'lxc stop' command
 
-`
+```
 $ lxc stop python-3-11-desktop
-`
+```
 
 Now lets list the container database to check on the status of the container we are trying to manage
 
-`
+```
 $ lxc list -f csv
-`
-
-`
 python-3-11-desktop,STOPPED,,,CONTAINER,0
-`
+```
 
 As you can see the container is now stopped.  
 
 #### How do I start an 'lxd' container instance?
 Well first lets check on the status of the existing container instances
 
-`
+```
 $ lxc list -f csv
-`
-
-`
 python-3-11-desktop,STOPPED,,,CONTAINER,0
-`
+```
 
 We see that it is in the "STOPPED" state.  Lets start it back up
 
-`
+```
 $ lxc start python-3-11-desktop
-`
+```
 
 Now lets list the contents of the LXD database to see what the status of the containers are
 
-`
+```
 $ lxc list -f csv
-`
-
-`
 python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0
-`
+```
 
 As you can see the container is now running.
 
@@ -206,63 +188,55 @@ Deleting a container instance is pretty straightforward.  Just know, that before
 
 First lets see what is currently running
 
-`
+```
 $ lxc list -f csv
-`
-
-`
 python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0
-`
+```
 
 We see that it is running.  As mentioned above, to delete a container it must first be stopped.  Lets stop this running container
 
 
-`
+```
 $ lxc stop python-3-11-desktop
-`
+```
 
 Now that it is stopped, lets delete it from the LXD database
 
 
-`
+```
 $ lxc delete python-3-11-desktop
-`
+```
 
 Lets list the container database again, to see the status of available containers
 
-`
+```
 $ lxc list -f csv
-`
+```
 
 Now you can see that it has been deleted.
 
 #### How do I login to my new container?
-Logging into a container is as simple as running a command inside of the container and then have it execute in an interactive mode.  To do this we will use the 'lxc exec' command to execute an interactive 'bashj' shell.  From within this shell you will be 'inside' of the container.  What this means is that now any command you run from within this shell running inside of the container, it will be confined to the container.  
+Logging into a container is as simple as running a command inside of the container and then have it execute in an interactive mode.  To do this we will use the 'lxc exec' command to execute an interactive 'bash' shell.  From within this shell you will be 'inside' of the container.  What this means is that now any command you run from within this shell running inside of the container, it will be confined to the container.  
 
-`
+```
 $ lxc exec python-3-11-desktop --env DISPLAY=:1 --env HOME=/home/ubuntu --user 1000 -- bash --login
-`
+```
 
 You will now be dropped into a shell INSIDE of the container 'python-3-11-desktop'
 
-`
+```
 ubuntu@python-3-11-desktop:~$ 
-`
+```
+
 As you can see above, by running the 'lxc exec ...' command you know have a shell inside of the container.  In addittion to that, any modifications you make to the filesystem, such as installing software, changing permissions, moving files around, will be entirely contained within this 'lxd' container.
 
 To 'log out' of the container just type 'exit' as you normally woulkd to exit a UNIX shell.
 
-`
+```
 ubuntu@python-3-11-desktop:~$ exit
-`
-
-`
 logout
-`
-
-`
 tmendoza@godbox-Linux:/media/tmendoza/
-`
+```
 
 You should now be back into the original shell where you ran the 'lxc exec ...' command.
 
