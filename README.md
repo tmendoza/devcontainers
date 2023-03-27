@@ -120,6 +120,8 @@ LXC is a CLI tool for managing the lifecycle of some type of container.  We are 
 
 #### Launching a new container
 To launch a new container we use the 'lxc launch' command.  If I wanted to create a new Ubuntu Jammy/22.04 based container and call it "python-3-11-desktop" then I would use the following command with output:
+
+
 `
 $ lxc launch ubuntu:22.04 python-3-11-desktop
 Creating python-3-11-desktop
