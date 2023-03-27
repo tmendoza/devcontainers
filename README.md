@@ -62,17 +62,17 @@ Now that you have git installed and have some basic build tools available, we no
 
 For myself, I always create a directory called 'dev' in my home directory.  Underneath that directory I will have a directory called 'repos'.  It is within this 'repo' directory where I checkout remote GitHub repositories.  Here is an example.
 
-- First create the 'repos' directory
+###### First create the 'repos' directory
 `
 $ mkdir -p $HOME/dev/repos
 `
 
-- Next change directory to this new 'repos' directory
+###### Next change directory to this new 'repos' directory
 `
 $ cd $HOME/dev/repos
 `
 
-- Next checkout the 'devcontainers' repository hosted on GitHub
+###### Next checkout the 'devcontainers' repository hosted on GitHub
 `
 git clone https://github.com/tmendoza/devcontainers.git
 `
