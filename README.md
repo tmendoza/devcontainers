@@ -132,7 +132,7 @@ Starting python-3-11-desktop
 `
 
 #### How do I list all of my container instances?
-When you create a new container using the 'lxc launch' command, the lxd downloads the ubuntu images and stores it and it's configuration in the lxd database.  But how do you view the status of your containers?  Using the 'lxc list' command you can list all of the containers you have built. 
+When you create a new container using the 'lxc launch' command, LXD downloads the ubuntu images and stores it and it's configuration in the LXD database.  But how do you view the status of your containers?  Using the 'lxc list' command you can list all of the containers you have built. 
 
 `
 $ lxc list -f csv
@@ -209,6 +209,9 @@ First lets see what is currently running
 
 `
 $ lxc list -f csv
+`
+
+`
 python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0
 `
 
@@ -239,36 +242,37 @@ Logging into a container is as simple as running a command inside of the contain
 
 `
 $ lxc exec python-3-11-desktop --env DISPLAY=:1 --env HOME=/home/ubuntu --user 1000 -- bash --login
+`
+
+You will now be dropped into a shell INSIDE of the container 'python-3-11-desktop'
+
+`
 ubuntu@python-3-11-desktop:~$ ps auxwww|head -20
+`
+
+`
 USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 root           1  0.0  0.0 167256  9764 ?        Ss   18:17   0:00 /sbin/init
 root          57  0.0  0.0  31540 10428 ?        Ss   18:17   0:00 /lib/systemd/systemd-journald
 root         103  0.0  0.0  11096  4008 ?        Ss   18:17   0:00 /lib/systemd/systemd-udevd
-root         109  0.0  0.0   4852  1476 ?        Ss   18:17   0:00 snapfuse /var/lib/snapd/snaps/core20_1822.snap /snap/core20/1822 -o ro,nodev,allow_other,suid
-root         110  0.0  0.0   4716  1476 ?        Ss   18:17   0:01 snapfuse /var/lib/snapd/snaps/snapd_18357.snap /snap/snapd/18357 -o ro,nodev,allow_other,suid
-root         111  0.0  0.0   4800  1252 ?        Ss   18:17   0:00 snapfuse /var/lib/snapd/snaps/lxd_24322.snap /snap/lxd/24322 -o ro,nodev,allow_other,suid
-systemd+     302  0.0  0.0  16120  5912 ?        Ss   18:17   0:00 /lib/systemd/systemd-networkd
-systemd+     304  0.0  0.0  25260  9952 ?        Ss   18:17   0:00 /lib/systemd/systemd-resolved
-root         336  0.0  0.0   7284  1724 ?        Ss   18:17   0:00 /usr/sbin/cron -f -P
-message+     337  0.0  0.0   8584  3124 ?        Ss   18:17   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
-root         342  0.0  0.0  32984 15776 ?        Ss   18:17   0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
-syslog       343  0.0  0.0 152768  3280 ?        Ssl  18:17   0:00 /usr/sbin/rsyslogd -n -iNONE
-root         345  0.0  0.1 2795076 43296 ?       Ssl  18:17   0:00 /usr/lib/snapd/snapd
-root         347  0.0  0.0  15040  5300 ?        Ss   18:17   0:00 /lib/systemd/systemd-logind
-root         356  0.0  0.0   6216   892 pts/0    Ss+  18:17   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud console 115200,38400,9600 linux
-root         363  0.0  0.0  15424  5744 ?        Ss   18:17   0:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
-root         370  0.0  0.0 235444  5708 ?        Ssl  18:17   0:00 /usr/libexec/polkitd --no-debug
-root         371  0.0  0.0 110276 16756 ?        Ssl  18:17   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
-ubuntu      1045  0.0  0.0   9092  4248 pts/1    Ss   18:31   0:00 bash --login
+
 `
 As you can see above, by running the 'lxc exec ...' command you know have a shell inside of the container.  Once inside of the container, I executed the 'ps auxwww | head -20' command to show you that the 'ps' command is only seeing what is inside of the container.  In addittion to that, any modifications you make to the filesystem, such as installing software, changing permissions, moving files around, will be entirely contained within this 'lxd' container.
 
 To 'log out' of the container just type 'exit' as you normally woulkd to exit a UNIX shell.
 `
 ubuntu@python-3-11-desktop:~$ exit
+`
+
+`
 logout
+`
+
+`
 tmendoza@godbox-Linux:/media/tmendoza/
 `
+
+You should now be back into the original shell where you ran the 'lxc exec ...' command.
 
 
 
