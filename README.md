@@ -56,7 +56,7 @@ There will be subdirectories, each containing LXD container build scripts for sp
 ## Installation
 
 ### Prerequisites
-The first step in setting up your Linux laptop.  These instructions assume a version of Ubuntu Desktop has been installed on the machine your are using.  These instructions also assume that you already have a login id configured on this laptop and that you can login successfully to the machine running a recent version of Ubuntu Desktop.  Finally, these directions also assume that you have 'sudo' access on the system we need to modify.  'sudo' access will be needed because you will need to run some installtion and system commands as root to properly perform the installation and configuration of LXC/LXD.
+The first step in setting up your Linux host machine.  These instructions assume a version of Ubuntu Desktop has been installed on the host machine your are using to run your containers.  These instructions also assume that you already have a login id configured on this machine and that you can login successfully to the machine.  Finally, these directions also assume that you have 'sudo' access on the system we need to modify.  'sudo' access will be needed because you will need to run some installtion and system commands as root to properly perform the installation and configuration of LXD.
 
 In the following sections I will be referring to two distinct types of systems:
 
