@@ -117,7 +117,6 @@ Description:
   All of LXD's features can be driven through the various commands below.
   For help with any of those, simply call them with --help.
 
-
 Usage:
   lxc [command]
 
@@ -153,7 +152,6 @@ Available Commands:
   storage     Manage storage pools and volumes
   version     Show local and remote versions
   warning     Manage warnings
-
 `
 
 We are not going to cover all of these items.  We will concern ourselves with '5' main tools:
@@ -192,7 +190,7 @@ Starting python-3-11-desktop
 `
 
 #### Where is this 'container' and what is it's status?
-When you create a new container using the 'lxc' command, the 'lxc' command downloads the ubuntu images and stores it and it's configuration in the 'lxd' database.  Using the 'lxc' command you can list all of the containers you have built. 
+When you create a new container using the lxc command, the lxc command downloads the ubuntu images and stores it and it's configuration in the lxd database.  Using the lxc command you can list all of the containers you have built. 
 
 `
 $ lxc list
