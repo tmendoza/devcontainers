@@ -2,29 +2,30 @@
 My repository of special purpose desktop development vscode containers
 
 # Description
-This repository contains a collection of LXC/LXD containers, purpose built, for software development.  
-Since I do development in many different languages , using many diferent tools depending on the language (LISP, Python, Go, Rust, C, C++, Plan9, STM32 embedded, etc), lxc containers are 
-a great way for managing language ecosystem tooling and development environments.  
+This repository contains a collection of tools for building LXD containers, purpose built, for software development. Since I do development in many different languages and on many different platforms (LISP, Python, Go, Rust, C, C++, Plan9, STM32 embedded, etc), containers are a great way for managing a programming language's tooling ecosystem without polluting your base host machine.
 
 ## Reasons for LXC/LXD vs Docker
 
 > application containers run a single app/process, whereas system containers run a full operating system giving them flexibility for the workload types they support.  [LXD vs Docker](https://ubuntu.com/blog/lxd-vs-docker)
 
-LXD manages system containers.  Unlike Docker, which manages Application containers, system containers are more like tradtional virtual machines.  They come with a whole system and also can host several  applications.  As a developer, I don't need just one application.  I need a whole suite of applications and using a system container better fits more working model of development environments.
+LXD manages system containers.  Unlike Docker, which manages Application containers, system containers are more like traditional virtual machines.  They come with a whole system and also can host several  applications.  As a developer, I don't need just one application.  I need a whole suite of applications and using a system container better fits more working model of development environments.  I started down the Docker road, but it became too unwieldy and their recent licensing changes make it difficult to depend on them.  LXD seems to fit best when considering my circumstances and personal proclivities.
 
 ## Directory Structure
- /manifests - This directory contains the shell scripts for building the LXD system containers.  There will be one shell scripts per development environment type. 
+
+- **/manifests** This directory contains the shell scripts for building the LXD system containers.  There will be one shell scripts per development environment type. 
+
+- **/python** This directory contains some example python scripts that can be copied over to a running container to test whether python is operating as expected.  
 
 There will be subdirectories, each containing Dockerfiles for specific IDE's.
 
 ### /manifests/vscode - VSCode Environments
 
-* Desktop-GUI-PySide6-Python-3.11-noenv-Linux-Ubuntu-ALL.sh 
-* Desktop-GUI-SimpleGUI-Python-3.11-noenv-Linux-Ubuntu-ALL.sh 
+* Desktop-GUI-Python-3.10-VSCode-Linux-Ubuntu-ALL.sh 
+* Desktop-GUI-Python-3.11-VSCode-Linux-Ubuntu-ALL.sh 
 
 ### /manifests/neovim - Neo Vim Environments
 
-* Desktop-GUI-Machine-Learning-Python-3.11-venv-Linux-Ubuntu-ALL.sh 
+* None yet
 
 ## Installation
 
@@ -303,9 +304,9 @@ lxc exec $ENVNAME --  apt-get install qt6-base-dev -y
 lxc exec $ENVNAME --  apt-get install wget -y
 ```
 
-As can be seen from the script above, all it is doing is calling out to 'lxc' with the container name and running 'exec' commands to install software packages.  
+As can be seen from the script above, all it is doing is calling out to 'lxc exec <name>' with the container name and running 'exec' commands to install software packages.  
 
-Basically anything you can do from the command line normally, you can do using the 'lxc exec ...' command.  Each one of the scripts within the 'manifests' directories looks very similar to this and just executes a bunch of commands that install packages, copy files from the host to the container, delete tmp folders, etc., etc.
+Basically anything you can do from the command line normally, you can also do using the 'lxc exec ...' command.  Each one of the scripts within the 'manifests' directories looks very similar to this and just executes a bunch of commands that install packages, copy files from the host to the container, delete tmp folders, etc., etc.
 
 To see the full capabilities of the 'lxc' command you can run 
 
@@ -368,3 +369,6 @@ Use "lxc [command] --help" for more information about a command.
 ```
 
 To get the help you need.  
+
+### How do I build a Python 3.11 GUI Development environment using PySimpleGUI and VS Code
+Just run the  
