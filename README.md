@@ -63,22 +63,30 @@ In the following sections I will be referring to two distinct types of systems:
 * Host System
 * Guest System
 
-In the Linux virtualization space, which includes things like containers and virtual machines, there is a distinction made between types of systems.  "Host" systems actually host the execution of virtual environments like "containers" and/or "virtual machines".  In our scenario, our Ubuntu Linux Desktop machine, will be the host for the virtual environments we will be creating and running.
+In the Linux virtualization space, which includes things like containers and virtual machines, there is a distinction made between two types of systems: Host systems and Guest systems.
 
-Now hosting and managing Linux virtual environments is not the easiest of tasks.  Sure you could do it manually by calling a bunch of low-level system API's or accessing files in the /dev and /proc filesystems, but why do that when you can just run [LXD](https://linuxcontainers.org/lxd/introduction/).
+Host systems actually host the execution of virtual environments like "containers" and/or "virtual machines".  In our scenario, our Ubuntu Linux machine will be the host for the virtual environments we will be creating and running using LXD.
 
-LXD was designed specifically with this task in mind:  make managing low-level containers and virtual machines easy and more efficient.
+Guests are virtual environments like 'containers' and 'virtual machines'.  Guests run on TOP of Hosts.  So all of our containers we will be building will be running as 'guest' systems on top of the 'host' system, our Ubuntu Linux machine.
+
+Now hosting and managing Linux virtual environments is not the easiest of tasks.  Virtualization is a kernel level technology.  This means that it is VERY low-level and is not something everyday users would find comfortable using.  Sure you could do it manually by calling a bunch of low-level system API's or accessing files in the /dev and /proc filesystems, but why do that when you can just run [LXD](https://linuxcontainers.org/lxd/introduction/).
+
+LXD was designed specifically with this task in mind:  make managing low-level containers and virtual machines easy and more efficient for everyday normal users like ourselves.
 
 Now LXD is still considered somewhat lower level than tools like Docker, but this lower level of access provides us with some operational advantages.  We get way more control over how the containers and virtual machines are built.
 
 #### Install essential developers tools on the Host system
-To properly use and install LXD and LXC you will need to install a base set of tools on the Ubuntu system.  This core set of tools is called [build-essential](https://packages.ubuntu.com/jammy/devel/build-essential).  This just contains a bunch of core system utilities needed to do any meaningful software development on a Linux system.
+To properly use and install LXD and you will need to install a base set of tools on the host Ubuntu system.  This core set of tools is called [build-essential](https://packages.ubuntu.com/jammy/devel/build-essential).  This just contains a bunch of core system utilities needed to do any meaningful software development on a Linux system.
+
+To install these base tools, run this command on the host Ubunut Linux machine
 
 ```bash
 sudo apt-get install build-essential
 ```
 #### Install Git 
 Next lets install [Git](https://packages.ubuntu.com/jammy/git).  [Git](https://git-scm.com/) is a modern distributed version control system.  It is extremely popular in open-source development communities and has become the defacto standard for managing versioned software.  In our case, we will be using the Git command line tools to interact with the GitHub remote version control & collaboration platform.  Many of the tools you will using during the installation process will come from this repository.  Git is what you will use to access these tools
+
+This command also needs to be run on the host machine
 
 ```bash
 sudo apt-get install git
