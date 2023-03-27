@@ -136,6 +136,7 @@ When you create a new container using the 'lxc launch' command, the lxd download
 `
 $ lxc list -f compact
 `
+<p>
 `
             NAME             STATE           IPV4          IPV6    TYPE     SNAPSHOTS  
   python-3-11-desktop      RUNNING  10.209.29.252 (eth0)        CONTAINER  0          
@@ -157,6 +158,7 @@ Lets list the container database again, to see the status of available container
 `
 $ lxc list -f compact
 `
+<p>
 `
         NAME           STATE           IPV4          IPV6    TYPE     SNAPSHOTS  
   python-3-11-desktop  RUNNING  10.209.29.252 (eth0)        CONTAINER  0        
