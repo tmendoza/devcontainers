@@ -40,9 +40,9 @@ LXD manages system containers.  Unlike Docker, which manages Application contain
 This directory contains some example python scripts that can be copied over to a running container to test whether python is operating as expected.  
 
 ### **/manifests** 
-This directory contains the shell scripts for building the LXD system containers.  There will be one shell scripts per development environment type. 
+This directory contains the shell scripts for building the LXD system containers.  There will be one shell script per development environment type. 
 
-There will be subdirectories, each containing Dockerfiles for specific IDE's.
+There will be subdirectories, each containing LXD container build scripts for specific IDE's.  For example, I have build scripts for Visual Studio code and also NeoVim.  
 
 #### /manifests/vscode - VSCode Environments
 
