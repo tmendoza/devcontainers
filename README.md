@@ -138,49 +138,22 @@ $ lxc list -f compact
   ubuntu-22-04-python3-11  STOPPED                              CONTAINER  0     
 `
 
-As you can see, I have two existing containers within my desktop machines LXD database.  One is running and the other one is stopped.  You can also see the one we just created.  It is running and is accessible.  But before we 'login' to your new container, lets delete the old ones listed above.
+As you can see, I have an existing container within my desktop machine's LXD database.  One is running and the other one is stopped.  You can also see the one we just created.  It is running and is accessible.  But before we 'login' to your new container, lets delete the old one listed above.
 
 #### How do I delete an 'lxd' container instance?
 Deleting a container instance is pretty straightforward.  Just know, that before you can delete a container it must be stopped.  Also, know that deleting a container deletes any and all data associated with that current container.  What this means is that if you do not have a backup of your container nor a backup of the data within you container, deleting the container using 'lxc delete <name>' will delete everything both in and about your container.
 
-Let's first delete the container named 'ubuntu-22-04-python3-10'.  Notice that it is running.  We need to stop it first.
-
-#### How do I stop a running container?
-Stopping a container is super simple
-`
-$ lxc stop ubuntu-22-04-python3-10
-`
-
-Now do an 'lxc list' to see the current state of the containers
-`
-$ lxc list
-+-------------------------+---------+----------------------+------+-----------+-----------+
-|          NAME           |  STATE  |         IPV4         | IPV6 |   TYPE    | SNAPSHOTS |
-+-------------------------+---------+----------------------+------+-----------+-----------+
-| python-3-11-desktop     | RUNNING | 10.209.29.252 (eth0) |      | CONTAINER | 0         |
-+-------------------------+---------+----------------------+------+-----------+-----------+
-| ubuntu-22-04-python3-10 | STOPPED |                      |      | CONTAINER | 0         |
-+-------------------------+---------+----------------------+------+-----------+-----------+
-| ubuntu-22-04-python3-11 | STOPPED |                      |      | CONTAINER | 0         |
-+-------------------------+---------+----------------------+------+-----------+-----------+
-`
-
-Now that the right container has been stopped, lets go ahead and delete it
+Let's first delete the container named 'ubuntu-22-04-python3-11'.  
 
 `
-$ lxc delete ubuntu-22-04-python3-10
+$ lxc delete ubuntu-22-04-python3-11
 `
 
 Lets list the container database again, to see the status of available containers
 `
-$ lxc list
-+-------------------------+---------+----------------------+------+-----------+-----------+
-|          NAME           |  STATE  |         IPV4         | IPV6 |   TYPE    | SNAPSHOTS |
-+-------------------------+---------+----------------------+------+-----------+-----------+
-| python-3-11-desktop     | RUNNING | 10.209.29.252 (eth0) |      | CONTAINER | 0         |
-+-------------------------+---------+----------------------+------+-----------+-----------+
-| ubuntu-22-04-python3-11 | STOPPED |                      |      | CONTAINER | 0         |
-+-------------------------+---------+----------------------+------+-----------+-----------+
+$ lxc list -f compact
+         NAME           STATE           IPV4          IPV6    TYPE     SNAPSHOTS  
+  python-3-11-desktop  RUNNING  10.209.29.252 (eth0)        CONTAINER  0        
 `
 
 Now you can see that it has been deleted.
