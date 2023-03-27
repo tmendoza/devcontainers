@@ -247,17 +247,9 @@ $ lxc exec python-3-11-desktop --env DISPLAY=:1 --env HOME=/home/ubuntu --user 1
 You will now be dropped into a shell INSIDE of the container 'python-3-11-desktop'
 
 `
-ubuntu@python-3-11-desktop:~$ ps auxwww|head -20
+ubuntu@python-3-11-desktop:~$ 
 `
-
-`
-USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-root           1  0.0  0.0 167256  9764 ?        Ss   18:17   0:00 /sbin/init
-root          57  0.0  0.0  31540 10428 ?        Ss   18:17   0:00 /lib/systemd/systemd-journald
-root         103  0.0  0.0  11096  4008 ?        Ss   18:17   0:00 /lib/systemd/systemd-udevd
-
-`
-As you can see above, by running the 'lxc exec ...' command you know have a shell inside of the container.  Once inside of the container, I executed the 'ps auxwww | head -20' command to show you that the 'ps' command is only seeing what is inside of the container.  In addittion to that, any modifications you make to the filesystem, such as installing software, changing permissions, moving files around, will be entirely contained within this 'lxd' container.
+As you can see above, by running the 'lxc exec ...' command you know have a shell inside of the container.  In addittion to that, any modifications you make to the filesystem, such as installing software, changing permissions, moving files around, will be entirely contained within this 'lxd' container.
 
 To 'log out' of the container just type 'exit' as you normally woulkd to exit a UNIX shell.
 `
