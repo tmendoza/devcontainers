@@ -55,13 +55,13 @@ sudo apt-get install build-essential
 Next lets install [Git](https://packages.ubuntu.com/jammy/git).  [Git](https://git-scm.com/) is a modern distributed version control system.  It is extremely popular in open-source development communities and has become the defacto standard for managing versioned software.  In our case, we will be using the Git command line tools to interact with the GitHub remote version control & collaboration platform.  Many of the tools you will using during the installation process will come from this repository.  Git is what you will use to access these tools
 
 ```bash
-sudo apt-get install 
+sudo apt-get install git
 ```
 
 ##### Checkout 'devcontainers' GitHub repository
 Now that you have git installed and have some basic build tools available, we now need to download this repository into your home directory.  If you do not have one already, I would suggest creating a separate directory, under your home directory, that contains all of your GitHub repositories.  
 
-For myself, I always create a directory called 'dev' in my home directory.  Underneath that directory I will have a directory called 'repos'.  It is within this 'repo' directory where I checkout remote GitHub repositories.  Here is an example.
+For myself, I always create a directory called 'dev' in my home directory.  Underneath that directory I will have a directory called 'repos'.  It is within this 'repos' directory where I checkout remote GitHub repositories.  Here is an example.
 
 ###### First create the 'repos' directory
 ```bash
@@ -81,9 +81,13 @@ git clone https://github.com/tmendoza/devcontainers.git
 At this point you should have everything you need to begin the installation of LXD
 
 ### Install LXD
-Installing LXD is pretty straightforward on an Ubuntu system  To install LXD you will install what is called a Snap.  So what is a snap?  Well a [snap](https://ubuntu.com/core/services/guide/snaps-intro) is just a containerized version of a software application.  See!  Even the Linux distributors are doing what we are attempting to do here.  They are creating packaged environments for specific applications.  
+Installing LXD is pretty straightforward on an Ubuntu system  To install LXD you will install a snap.
 
-This is a more narrow use-case than LXD containers.  Snap containers are more like Docker containers in that they package up just an application and all of it's dependencies.  It is not a whole system like an LXD container or LXD Virtual machine.  You can think of these different virtualization technologies as existing on a spectrum of virtualization.  To the far left you have small virtual environments and on the far right you have more heavy weight virtual environments
+So what is a snap?  
+
+Well a [snap](https://ubuntu.com/core/services/guide/snaps-intro) is just a containerized version of a software application.  See!  Even the Linux distributors are doing what we are attempting to do here.  They are creating packaged environments for specific applications.  LXD is packaged up as a 'snap' package and we need to use the 'snap' command to do the installation.
+
+As an aside, a 'snap' container is a more narrow use-case than LXD containers.  Snap containers are more like Docker containers in that they package up just an application and all of it's dependencies.  It is not a whole system like an LXD container or LXD Virtual machine.  You can think of these different virtualization technologies as existing on a spectrum of virtualization.  To the far left you have small virtual environments and on the far right you have more heavy weight virtual environments
 
 #### Virtual environment types and size
 
@@ -92,6 +96,7 @@ This is a more narrow use-case than LXD containers.  Snap containers are more li
 | snap  | docker | lxd   | vm      |
 
 #### Install the LXD binaries
+Now lets install the LXD binaries using the 'snap' command
 
 ```bash
 sudo snap install lxd
@@ -104,7 +109,7 @@ Before you can create an LXD instance, you will need to initialize the system.  
 sudo lxd init
 ```
 
-AS part of the initialization process you will be asked a series of questions.  You should accept the deaults for all of the questions with the exception of the "Storage Pools" section.   Here you will want to select 'zfs'
+As part of the initialization process you will be asked a series of questions.  You should accept the deaults for all of the questions with the exception of the "Storage Pools" section.   Here you will want to select 'zfs'
 
 ### Manage container instances
 Now that LXD is installed, we want to start creating our own custom container images and start them up to do some work.  To do this, the LXD suite of tools comes with a command line tool called 'lxc'.
@@ -370,5 +375,104 @@ Use "lxc [command] --help" for more information about a command.
 
 To get the help you need.  
 
-### How do I build a Python 3.11 GUI Development environment using PySimpleGUI and VS Code
-Just run the  
+### How do I build a Python 3.11 GUI Development environment with PySide 6, PySimpleGUI and VS Code
+First make sure LXD is installed and configured properly.  If you have run through the instructions above, you should be able to determine if LXD and any LXD instances are installed, up and running.
+
+After ensuring LXD is installed, you should be able to execute the various scripts in the **/manifest** directories within this repository.  In this specific use-case we are trying to construct a container instance designed for doing Python GUI development using PySimpleGUI or PySide 6.  In this scenario, we also require Python version 3.11 and also require Visual Studio code be installed as the editor.
+
+Note, that when completed, everything will be running within the container.  This includes Visual Studio Code.  It will look like a normal shell environment where you can launch a GUI for the CLI, but just remember that this is running within the LXD container.
+
+To build a LXD container that fits these requirements run the following command from the root of the 'devcontainers' repository copy on your host machine
+
+```bash
+./manifests/vscode/Desktop-GUI-Python-3.11-VSCode-Linux-Ubuntu-ALL.sh
+
+# LOTS OF STUFF HERE
+Fetched 5412 kB in 1s (10.3 MB/s)                                    
+Selecting previously unselected package libsecret-common.
+(Reading database ... 54152 files and directories currently installed.)
+Preparing to unpack .../libsecret-common_0.20.5-2_all.deb ...
+Unpacking libsecret-common (0.20.5-2) ...
+Selecting previously unselected package libsecret-1-0:amd64.
+Preparing to unpack .../libsecret-1-0_0.20.5-2_amd64.deb ...
+Unpacking libsecret-1-0:amd64 (0.20.5-2) ...
+Selecting previously unselected package code.
+Preparing to unpack /tmp/code.deb ...
+Unpacking code (1.76.2-1678817801) ...
+Selecting previously unselected package libvulkan1:amd64.
+Preparing to unpack .../libvulkan1_1.3.204.1-2_amd64.deb ...
+Unpacking libvulkan1:amd64 (1.3.204.1-2) ...
+Selecting previously unselected package mesa-vulkan-drivers:amd64.
+Preparing to unpack .../mesa-vulkan-drivers_22.2.5-0ubuntu0.1~22.04.1_amd64.deb ...
+Unpacking mesa-vulkan-drivers:amd64 (22.2.5-0ubuntu0.1~22.04.1) ...
+Setting up libvulkan1:amd64 (1.3.204.1-2) ...
+Setting up libsecret-common (0.20.5-2) ...
+Setting up mesa-vulkan-drivers:amd64 (22.2.5-0ubuntu0.1~22.04.1) ...
+Setting up libsecret-1-0:amd64 (0.20.5-2) ...
+Setting up code (1.76.2-1678817801) ...
+Processing triggers for shared-mime-info (2.1-2) ...
+Processing triggers for mailcap (3.70+nmu1ubuntu1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+ubuntu@ubuntu-22-04-python3-11:~$ 
+```
+
+You will get  a lot of output and it may go on for a few minutes so relax.  This is to be expected.  Now what you are seeing at the end
+
+```bash
+ubuntu@ubuntu-22-04-python3-11:~$ 
+```
+
+Is a shell prompt INSIDE of the container.  You are logged in as the 'ubuntu' user in the container named 'ubuntu-22-04-python3-11'.  That name is defined inside of the script used to build the container image.
+
+If you type 'exit' you will be dropped into a different prompt which represents the host machine.  On my machine when I type 'exit' from within the container my prompt changes as follows
+
+```bash
+ubuntu@ubuntu-22-04-python3-11:~$ exit
+logout
+tmendoza@Godbox-Linux:~/dev/repos/devcontainers$ 
+```
+
+My host machine is named 'Godbox-Linux'.  As you can see when I type 'exit' from within the container, it 'logged' me out and dropped me back into the host machine's shell.
+
+To log back into the container first lets find the containers running
+
+```bash
+lxc list -f csv
+```
+
+```bash
+ubuntu-22-04-python3-11,RUNNING,10.209.29.238 (eth0),,CONTAINER,0
+```
+Now lets log back into the container we just built
+
+```bash
+lxc exec $ENVNAME --env DISPLAY=:1 --env HOME=/home/ubuntu --user 1000 -- bash --login
+```
+
+```bash
+ubuntu@ubuntu-22-04-python3-11:~$ 
+```
+
+# How do you launch Visual Studio Code from inside a container?
+First lets login to your running container
+
+```bash
+lxc exec $ENVNAME --env DISPLAY=:1 --env HOME=/home/ubuntu --user 1000 -- bash --login
+```
+
+```bash
+ubuntu@ubuntu-22-04-python3-11:~$ 
+```
+
+Now execute the Visual Studio code command line
+
+```bash
+code .
+```
+
+This will launch Visual Studio code inside of the container.  As you browse around the filesystem from within Visual Studio code, you will notice that you cannot see any files or filesystems on the host system.  This is because you are inside of the container's environment.  This new environment is completely isolated from the host machine.  
+
+Your are free to does as you wish within the containerized environment.  You can install software, remove software, make system modifications, copy files back and forth between the host system and container.  You can ssh out of this environment, assuming you installed SSH ;-)
+
+Anyway, this system is now free to use as you please.
+
