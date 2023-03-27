@@ -91,6 +91,7 @@ This is a more narrow use-case than LXD containers.  Snap containers are more li
 | snap  | docker | lxd   | vm      |
 
 #### Install the LXD binaries
+
 `
 $ sudo snap install lxd
 `
@@ -107,15 +108,13 @@ AS part of the initialization process you will be asked a series of questions.  
 ### Manage container instances
 Now that LXD is installed, we want to start creating our own custom container images and start them up to do some work.  To do this, the LXD suite of tools comes with a command line tool called 'lxc'.
 
-LXC is a CLI tool for managing the lifecycle of some type of container.  We are not going to cover all of it's capabilities.  We will concern ourselves with '8' main tools:
+LXC is a CLI tool for managing the lifecycle of some type of container.  We are not going to cover all of it's capabilities.  We will concern ourselves with '6' main tools:
 
 * lxc launch
 * lxc list
 * lxc start
 * lxc stop 
-* lxc restart
 * lxc exec
-* lxc file
 * lxc delete 
 
 #### Launching a new container
@@ -252,6 +251,7 @@ ubuntu@python-3-11-desktop:~$
 As you can see above, by running the 'lxc exec ...' command you know have a shell inside of the container.  In addittion to that, any modifications you make to the filesystem, such as installing software, changing permissions, moving files around, will be entirely contained within this 'lxd' container.
 
 To 'log out' of the container just type 'exit' as you normally woulkd to exit a UNIX shell.
+
 `
 ubuntu@python-3-11-desktop:~$ exit
 `
@@ -266,5 +266,51 @@ tmendoza@godbox-Linux:/media/tmendoza/
 
 You should now be back into the original shell where you ran the 'lxc exec ...' command.
 
+### Customizing Container images
+Now that you know how to manage the lifecycle of an LXD container instance, we now need to move into customizing the base image.  See, all of the work you just did only built a basic container.  Basic containers are just that:  basic.  They have nothing really in them other than the core basic things you need to run an operating system.  This is nice because your container can be customized to contain only those things that you want inside of it.  
 
+To make modifications to a container you use the 'lxc exec' command.  Why?  Because this is the only command that allows you to directly interact with the container from OUTSIDE of the container.  So I can run 'lxc exec <container name> <some Linux CLI command>' and it will run '<some Linux CLI command>' within the container.  By default, the 'lxc exec' command runs as root, so it can be easily used to install software packages into the container.  
 
+Now to do this normally you can run command either from a shell on the host, or you can also script this so you don't have to type it all over again in case you wanted to rebuild your environment from scratch.  As a matter of fact, the 'manifests' directory of this repository contains folders of shell scripts for building custom LXD Containers.  Here is an example:
+
+```
+#!/bin/bash
+
+ENVNAME="ubuntu-22-04-python3-10"
+
+lxc list | grep "$ENVNAME"
+
+if [[ $? -eq 0 ]]
+then
+    lxc stop $ENVNAME 
+    lxc delete $ENVNAME 
+fi
+
+lxc launch images:ubuntu/22.04 $ENVNAME
+
+lxc config set $ENVNAME raw.idmap "both $UID 1000"
+lxc config device add $ENVNAME X1 disk path=/tmp/.X11-unix/X1 source=/tmp/.X11-unix/X1 
+lxc config device add $ENVNAME Xauthority disk path=/home/ubuntu/.Xauthority source=${XAUTHORITY}
+
+lxc restart $ENVNAME
+
+echo "Letting the system settle..."
+sleep 10 
+
+lxc exec $ENVNAME --  apt-get update
+lxc exec $ENVNAME --  apt-get install build-essential -y
+lxc exec $ENVNAME --  apt-get install zlib1g-dev -y
+lxc exec $ENVNAME --  apt-get install libncurses5-dev -y
+lxc exec $ENVNAME --  apt-get install libgdbm-dev -y
+lxc exec $ENVNAME --  apt-get install libnss3-dev -y
+lxc exec $ENVNAME --  apt-get install libssl-dev -y
+lxc exec $ENVNAME --  apt-get install libreadline-dev -y
+lxc exec $ENVNAME --  apt-get install libffi-dev -y
+lxc exec $ENVNAME --  apt-get install ffmpeg -y 
+lxc exec $ENVNAME --  apt-get install libgl1 -y
+lxc exec $ENVNAME --  apt-get install libsm6 -y 
+lxc exec $ENVNAME --  apt-get install libxext6 -y
+lxc exec $ENVNAME --  apt-get install libegl-dev -y 
+lxc exec $ENVNAME --  apt-get install qt6-base-dev -y
+lxc exec $ENVNAME --  apt-get install wget -y
+```
