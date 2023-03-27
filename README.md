@@ -314,3 +314,69 @@ lxc exec $ENVNAME --  apt-get install libegl-dev -y
 lxc exec $ENVNAME --  apt-get install qt6-base-dev -y
 lxc exec $ENVNAME --  apt-get install wget -y
 ```
+
+As can be seen from the script above, all it is doing is calling out to 'lxc' with the container name and running 'exec' commands to install software packages.  
+
+Basically anything you can do from the command line normally, you can do using the 'lxc exec ...' command.  Each one of the scripts within the 'manifests' directories looks very similar to this and just executes a bunch of commands that install packages, copy files from the host to the container, delete tmp folders, etc., etc.
+
+To see the full capabilities of the 'lxc' command you can run 
+
+```
+$ lxc
+Description:
+  Command line client for LXD
+
+  All of LXD's features can be driven through the various commands below.
+  For help with any of those, simply call them with --help.
+
+Usage:
+  lxc [command]
+
+Available Commands:
+  alias       Manage command aliases
+  cluster     Manage cluster members
+  config      Manage instance and server configuration options
+  console     Attach to instance consoles
+  copy        Copy instances within or in between LXD servers
+  delete      Delete instances and snapshots
+  exec        Execute commands in instances
+  export      Export instance backups
+  file        Manage files in instances
+  help        Help about any command
+  image       Manage images
+  import      Import instance backups
+  info        Show instance or server information
+  launch      Create and start instances from images
+  list        List instances
+  move        Move instances within or in between LXD servers
+  network     Manage and attach instances to networks
+  operation   List, show and delete background operations
+  profile     Manage profiles
+  project     Manage projects
+  publish     Publish instances as images
+  remote      Manage the list of remote servers
+  rename      Rename instances and snapshots
+  restart     Restart instances
+  restore     Restore instances from snapshots
+  snapshot    Create instance snapshots
+  start       Start instances
+  stop        Stop instances
+  storage     Manage storage pools and volumes
+  version     Show local and remote versions
+  warning     Manage warnings
+
+Flags:
+      --all            Show less common commands
+      --debug          Show all debug messages
+      --force-local    Force using the local unix socket
+  -h, --help           Print help
+      --project        Override the source project
+  -q, --quiet          Don't show progress information
+      --sub-commands   Use with help or --help to view sub-commands
+  -v, --verbose        Show all information messages
+      --version        Print version number
+
+Use "lxc [command] --help" for more information about a command.
+```
+
+To get the help you need.  
