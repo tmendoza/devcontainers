@@ -5,10 +5,10 @@ My repository of special purpose desktop development vscode containers
 This repository contains a collection of tools for building LXD containers, purpose built, for software development. Since I do development in many different languages and on many different platforms (LISP, Python, Go, Rust, C, C++, Plan9, STM32 embedded, etc), containers are a great way for managing a programming language's tooling ecosystem without polluting your base host machine.
 
 # Table of Contents
-[Reasons for LXC/LXD vs Docker](link)
+[Reasons for LXC/LXD vs Docker](https://github.com/tmendoza/devcontainers#reasons-for-lxclxd-vs-docker)
 
-[Repository Structure](link)
-  * [Python](link)
+[Repository Structure](https://github.com/tmendoza/devcontainers#repository-structure)
+  * [Python](https://github.com/tmendoza/devcontainers#python-this-directory-contains-some-example-python-scripts-that-can-be-copied-over-to-a-running-container-to-test-whether-python-is-operating-as-expected)
   * [Manifests](link)
 
 [Installation](link)
@@ -36,9 +36,11 @@ LXD manages system containers.  Unlike Docker, which manages Application contain
 
 ## Repository Structure
 
-### **/python** This directory contains some example python scripts that can be copied over to a running container to test whether python is operating as expected.  
+### **/python** 
+This directory contains some example python scripts that can be copied over to a running container to test whether python is operating as expected.  
 
-### **/manifests** This directory contains the shell scripts for building the LXD system containers.  There will be one shell scripts per development environment type. 
+### **/manifests** 
+This directory contains the shell scripts for building the LXD system containers.  There will be one shell scripts per development environment type. 
 
 There will be subdirectories, each containing Dockerfiles for specific IDE's.
 
