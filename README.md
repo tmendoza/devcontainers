@@ -47,15 +47,15 @@ Now LXD is still considered somewhat lower level than tools like Docker, but thi
 #### Install essential developers tools on the Host system
 To properly use and install LXD and LXC you will need to install a base set of tools on the Ubuntu system.  This core set of tools is called [build-essential](https://packages.ubuntu.com/jammy/devel/build-essential).  This just contains a bunch of core system utilities needed to do any meaningful software development on a Linux system.
 
-`
+```bash
 $ sudo apt-get install build-essential
-`
+```
 #### Install Git 
 Next lets install [Git](https://packages.ubuntu.com/jammy/git).  [Git](https://git-scm.com/) is a modern distributed version control system.  It is extremely popular in open-source development communities and has become the defacto standard for managing versioned software.  In our case, we will be using the Git command line tools to interact with the GitHub remote version control & collaboration platform.  Many of the tools you will using during the installation process will come from this repository.  Git is what you will use to access these tools
 
-`
+```bash
 $ sudo apt-get install 
-`
+```
 
 ##### Checkout 'devcontainers' GitHub repository
 Now that you have git installed and have some basic build tools available, we now need to download this repository into your home directory.  If you do not have one already, I would suggest creating a separate directory, under your home directory, that contains all of your GitHub repositories.  
@@ -63,19 +63,19 @@ Now that you have git installed and have some basic build tools available, we no
 For myself, I always create a directory called 'dev' in my home directory.  Underneath that directory I will have a directory called 'repos'.  It is within this 'repo' directory where I checkout remote GitHub repositories.  Here is an example.
 
 ###### First create the 'repos' directory
-`
+```bash
 $ mkdir -p $HOME/dev/repos
-`
+```
 
 ###### Next change directory to this new 'repos' directory
-`
+```bash
 $ cd $HOME/dev/repos
-`
+```
 
 ###### Next checkout the 'devcontainers' repository hosted on GitHub
-`
-$ git clone https://github.com/tmendoza/devcontainers.git
-`
+```bash
+git clone https://github.com/tmendoza/devcontainers.git
+```
 
 At this point you should have everything you need to begin the installation of LXD
 
@@ -93,14 +93,14 @@ This is a more narrow use-case than LXD containers.  Snap containers are more li
 #### Install the LXD binaries
 
 ```bash
-$ sudo snap install lxd
+sudo snap install lxd
 ```
 
 #### Initialize LXD 
 Before you can create an LXD instance, you will need to initialize the system.  To do this we run the command 'lxd init'
 
 ```bash
-$ sudo lxd init
+sudo lxd init
 ```
 
 AS part of the initialization process you will be asked a series of questions.  You should accept the deaults for all of the questions with the exception of the "Storage Pools" section.   Here you will want to select 'zfs'
@@ -121,10 +121,10 @@ LXC is a CLI tool for managing the lifecycle of some type of container.  We are 
 To launch a new container we use the 'lxc launch' command.  If I wanted to create a new Ubuntu Jammy/22.04 based container and call it "python-3-11-desktop" then I would use the following command with output:
 
 
+```bash
+lxc launch ubuntu:22.04 python-3-11-desktop
 ```
-$ lxc launch ubuntu:22.04 python-3-11-desktop
-```
-```
+```bash
 Creating python-3-11-desktop
 Starting python-3-11-desktop
 ```
@@ -132,20 +132,20 @@ Starting python-3-11-desktop
 #### How do I list all of my container instances?
 When you create a new container using the 'lxc launch' command, LXD downloads the ubuntu images and stores it and it's configuration in the LXD database.  But how do you view the status of your containers?  Using the 'lxc list' command you can list all of the containers you have built. 
 
-```
+```bash
 $ lxc list -f csv
 ```
-```
+```bash
 python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0 
 ```
 
 #### How do I stop a running container
 First get the name of the container you want to stop
 
-```
+```bash
 $ lxc list -f csv
 ```
-```
+```bash
 python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0 
 ```
 
@@ -153,16 +153,16 @@ The name is the data in the first column.  The value is 'python-3-11-desktop'.  
 
 To stop a running container we use the 'lxc stop' command
 
-```
+```bash
 $ lxc stop python-3-11-desktop
 ```
 
 Now lets list the container database to check on the status of the container we are trying to manage
 
-```
+```bash
 $ lxc list -f csv
 ```
-```
+```bash
 python-3-11-desktop,STOPPED,,,CONTAINER,0
 ```
 
@@ -171,7 +171,7 @@ As you can see the container is now stopped.
 #### How do I start an 'lxd' container instance?
 Well first lets check on the status of the existing container instances
 
-```
+```bash
 $ lxc list -f csv
 ```
 ```
@@ -180,13 +180,13 @@ python-3-11-desktop,STOPPED,,,CONTAINER,0
 
 We see that it is in the "STOPPED" state.  Lets start it back up
 
-```
+```bash
 $ lxc start python-3-11-desktop
 ```
 
 Now lets list the contents of the LXD database to see what the status of the containers are
 
-```
+```bash
 $ lxc list -f csv
 ```
 ```
@@ -200,30 +200,30 @@ Deleting a container instance is pretty straightforward.  Just know, that before
 
 First lets see what is currently running
 
-```
+```bash
 $ lxc list -f csv
 ```
-```
+```bash
 python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0
 ```
 
 We see that it is running.  As mentioned above, to delete a container it must first be stopped.  Lets stop this running container
 
 
-```
+```bash
 $ lxc stop python-3-11-desktop
 ```
 
 Now that it is stopped, lets delete it from the LXD database
 
 
-```
+```bash
 $ lxc delete python-3-11-desktop
 ```
 
 Lets list the container database again, to see the status of available containers
 
-```
+```bash
 $ lxc list -f csv
 ```
 
@@ -232,13 +232,13 @@ Now you can see that it has been deleted.
 #### How do I login to my new container?
 Logging into a container is as simple as running a command inside of the container and then have it execute in an interactive mode.  To do this we will use the 'lxc exec' command to execute an interactive 'bash' shell.  From within this shell you will be 'inside' of the container.  What this means is that now any command you run from within this shell running inside of the container, it will be confined to the container.  
 
-```
+```bash
 $ lxc exec python-3-11-desktop --env DISPLAY=:1 --env HOME=/home/ubuntu --user 1000 -- bash --login
 ```
 
 You will now be dropped into a shell INSIDE of the container 'python-3-11-desktop'
 
-```
+```bash
 ubuntu@python-3-11-desktop:~$ 
 ```
 
@@ -246,7 +246,7 @@ As you can see above, by running the 'lxc exec ...' command you know have a shel
 
 To 'log out' of the container just type 'exit' as you normally woulkd to exit a UNIX shell.
 
-```
+```bash
 ubuntu@python-3-11-desktop:~$ exit
 logout
 tmendoza@godbox-Linux:/media/tmendoza/
@@ -309,7 +309,7 @@ Basically anything you can do from the command line normally, you can do using t
 
 To see the full capabilities of the 'lxc' command you can run 
 
-```
+```bash
 $ lxc
 Description:
   Command line client for LXD
