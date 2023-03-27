@@ -156,11 +156,11 @@ $ lxc delete ubuntu-22-04-python3-11
 `
 
 Lets list the container database again, to see the status of available containers
-**Input**
+
 `
 $ lxc list -f compact
 `
-**Output**
+
 `
         NAME           STATE           IPV4          IPV6    TYPE     SNAPSHOTS  
   python-3-11-desktop  RUNNING  10.209.29.252 (eth0)        CONTAINER  0        
