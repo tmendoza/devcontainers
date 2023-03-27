@@ -145,6 +145,18 @@ sudo lxd init
 
 As part of the initialization process you will be asked a series of questions.  You should accept the deaults for all of the questions with the exception of the "Storage Pools" section.   Here you will want to select 'zfs'
 
+### Updating user permissions
+You will also need to add your LXD users to various groups using the 'usermod' command.  Replace my user name 'tmendoza' with whatever username you are logging into on the system.  These commands will also need to be run as the 'root' user.
+
+```bash
+sudo usermod -aG sudo tmendoza
+```
+
+```bash
+sudo usermod -aG lxd tmendoza
+```
+
+
 ## Operations
 ### Manage container instances
 Now that LXD is installed, we want to start creating our own custom container images and start them up to do some work.  To do this, the LXD suite of tools comes with a command line tool called 'lxc'.
