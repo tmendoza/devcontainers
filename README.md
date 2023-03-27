@@ -131,9 +131,11 @@ Starting python-3-11-desktop
 #### Where is this 'container' and what is it's status?
 When you create a new container using the 'lxc launch' command, the lxd downloads the ubuntu images and stores it and it's configuration in the lxd database.  Using the lxc command you can list all of the containers you have built. 
 
-
 `
-$ lxc list
+$ lxc list -f compact
+           NAME             STATE           IPV4          IPV6    TYPE     SNAPSHOTS  
+  python-3-11-desktop      RUNNING  10.209.29.252 (eth0)        CONTAINER  0          
+  ubuntu-22-04-python3-11  STOPPED                              CONTAINER  0     
 `
 
 As you can see, I have two existing containers within my desktop machines LXD database.  One is running and the other one is stopped.  You can also see the one we just created.  It is running and is accessible.  But before we 'login' to your new container, lets delete the old ones listed above.
