@@ -131,39 +131,88 @@ Creating python-3-11-desktop
 Starting python-3-11-desktop
 `
 
-#### Where is this 'container' and what is it's status?
-When you create a new container using the 'lxc launch' command, the lxd downloads the ubuntu images and stores it and it's configuration in the lxd database.  Using the lxc command you can list all of the containers you have built. 
+#### How do I list all of my container instances?
+When you create a new container using the 'lxc launch' command, the lxd downloads the ubuntu images and stores it and it's configuration in the lxd database.  But how do you view the status of your containers?  Using the 'lxc list' command you can list all of the containers you have built. 
 
 `
-$ lxc list -f compact
+$ lxc list -f csv
+python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0 
 `
 
+#### How do I stop a running container
+First get the name of the container you want to stop
+
 `
-        NAME             STATE           IPV4          IPV6    TYPE     SNAPSHOTS
-python-3-11-desktop      RUNNING  10.209.29.252 (eth0)        CONTAINER  0          
-ubuntu-22-04-python3-11  STOPPED                              CONTAINER  0     
+$ lxc list -f csv
+python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0 
+`
+The name is the data in the first column.  The value is 'python-3-11-desktop'.  That is the name we will use going forward.
+
+To stop a running container we use the 'lxc stop' command
+
+`
+$ lxc stop python-3-11-desktop
 `
 
-As you can see, I have an existing container within my desktop machine's LXD database.  One is running and the other one is stopped.  You can also see the one we just created.  It is running and is accessible.  But before we 'login' to your new container, lets delete the old one listed above.
+Now lets list the container database to check on the status of the container we are trying to manage
+
+`
+$ lxc list -f csv
+python-3-11-desktop,STOPPED,,,CONTAINER,0
+`
+
+As you can see the container is now stopped.  
+
+#### How do I start an 'lxd' container instance?
+Well first lets check on the status of the existing container instances
+
+`
+$ lxc list -f csv
+python-3-11-desktop,STOPPED,,,CONTAINER,0
+`
+
+We see that it is in the "STOPPED" state.  Lets start it back up
+
+`
+$ lxc start python-3-11-desktop
+`
+
+Now lets list the contents of the LXD database to see what the status of the containers are
+
+`
+$ lxc list -f csv
+python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0
+`
+
+As you can see the container is now running.
 
 #### How do I delete an 'lxd' container instance?
 Deleting a container instance is pretty straightforward.  Just know, that before you can delete a container it must be stopped.  Also, know that deleting a container deletes any and all data associated with that current container.  What this means is that if you do not have a backup of your container nor a backup of the data within you container, deleting the container using 'lxc delete <name>' will delete everything both in and about your container.
 
-Let's first delete the container named 'ubuntu-22-04-python3-11'.  
+First lets see what is currently running
 
 `
-$ lxc delete ubuntu-22-04-python3-11
+$ lxc list -f csv
+python-3-11-desktop,RUNNING,10.209.29.252 (eth0),,CONTAINER,0
+`
+
+We see that it is running.  As mentioned above, to delete a container it must first be stopped.  Lets stop this running container
+
+`
+$ lxc stop python-3-11-desktop
+`
+
+Now that it is stopped, lets delete it from the LXD database
+
+
+`
+$ lxc delete python-3-11-desktop
 `
 
 Lets list the container database again, to see the status of available containers
 
 `
-$ lxc list -f compact
-`
-
-`
-        NAME           STATE           IPV4          IPV6    TYPE     SNAPSHOTS
-python-3-11-desktop  RUNNING  10.209.29.252 (eth0)        CONTAINER  0        
+$ lxc list -f csv
 `
 
 Now you can see that it has been deleted.
