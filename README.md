@@ -129,7 +129,8 @@ Starting python-3-11-desktop
 `
 
 #### Where is this 'container' and what is it's status?
-When you create a new container using the lxc command, the lxc command downloads the ubuntu images and stores it and it's configuration in the lxd database.  Using the lxc command you can list all of the containers you have built. 
+When you create a new container using the 'lxc launch' command, the lxd downloads the ubuntu images and stores it and it's configuration in the lxd database.  Using the lxc command you can list all of the containers you have built. 
+
 
 `
 $ lxc list
