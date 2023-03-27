@@ -139,9 +139,9 @@ $ lxc list -f compact
 `
 
 `
-            NAME             STATE           IPV4          IPV6    TYPE     SNAPSHOTS  
-  python-3-11-desktop      RUNNING  10.209.29.252 (eth0)        CONTAINER  0          
-  ubuntu-22-04-python3-11  STOPPED                              CONTAINER  0     
+        NAME             STATE           IPV4          IPV6    TYPE     SNAPSHOTS
+python-3-11-desktop      RUNNING  10.209.29.252 (eth0)        CONTAINER  0          
+ubuntu-22-04-python3-11  STOPPED                              CONTAINER  0     
 `
 
 As you can see, I have an existing container within my desktop machine's LXD database.  One is running and the other one is stopped.  You can also see the one we just created.  It is running and is accessible.  But before we 'login' to your new container, lets delete the old one listed above.
@@ -162,8 +162,8 @@ $ lxc list -f compact
 `
 
 `
-        NAME           STATE           IPV4          IPV6    TYPE     SNAPSHOTS  
-  python-3-11-desktop  RUNNING  10.209.29.252 (eth0)        CONTAINER  0        
+        NAME           STATE           IPV4          IPV6    TYPE     SNAPSHOTS
+python-3-11-desktop  RUNNING  10.209.29.252 (eth0)        CONTAINER  0        
 `
 
 Now you can see that it has been deleted.
