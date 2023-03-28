@@ -13,7 +13,7 @@ fi
 lxc launch images:ubuntu/22.04 $ENVNAME
 
 lxc config set $ENVNAME raw.idmap "both $UID 1000"
-lxc config device add $ENVNAME X1 disk path=/tmp/.X11-unix/X1 source=/tmp/.X11-unix/X1 
+lxc config device add $ENVNAME X0 disk path=/tmp/.X11-unix/X0 source=/tmp/.X11-unix/X0
 lxc config device add $ENVNAME Xauthority disk path=/home/ubuntu/.Xauthority source=${XAUTHORITY}
 
 lxc restart $ENVNAME
