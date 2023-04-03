@@ -63,6 +63,7 @@ lxc exec $ENVNAME --  pip install numpy
 lxc exec $ENVNAME --  pip uninstall opencv-python
 lxc exec $ENVNAME --  pip install opencv-python-headless
 lxc exec $ENVNAME --  pip install pysimplegui
+lxc exec $ENVNAME --  pip install streamlit
 lxc exec $ENVNAME --  pip install -U PySide6
 
 lxc exec $ENVNAME -- apt install x11-apps -y
