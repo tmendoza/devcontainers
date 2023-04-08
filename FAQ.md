@@ -438,8 +438,14 @@ lxc exec ubuntu-22-04-python3-11 -- ln -s /usr/bin/google-chrome-stable /usr/bin
 
 Now, from *within* the container, start chrome.  It will ask you a few questions the first time it starts up.  One of the questions is regarding setting Chrome as your 'default' browser.  Please select the checkbox so that Chrome is set as your 'default' browser.  This way, any links that are clicked on within a terminal will (hopefully) launch chrome by default.
 
+First lets get into the container
+```bash
+lxc exec  --env DISPLAY=:1 --env HOME=/home/ubuntu --user 1000 -- bash --login
+```
+
+Now, from within the container, lets start chrome
 ```bash
 chrome
 ```
 
-Chrome should now function as expected.  Remember, this Chrome is running *inside* of the container.  Any and all cookies managed by Chrome will be inside of the container.  Anything Chrome downloads will be stored within the container.  
+Chrome should open and function as expected.  Remember, this Chrome is running *inside* of the container.  Any and all cookies managed by Chrome will be inside of the container.  Anything Chrome downloads will be stored within the container. 
