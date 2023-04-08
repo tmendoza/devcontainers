@@ -414,6 +414,10 @@ Anyway, this system is now free to use as you please.
 ## How do I install Google Chrome within a container?
 This installation process avoids the issues associated within using Snap to install things into a container.
 
+Make sure these commands are run from *outside* of the container.  In other words, run these commands from the *host* system (laptop/desktop) not from within a 'guest' system (container).
+
+From within the 'host' system launch a command line terminal.  From the terminal you will run various commands.
+
 First we need to download and install the Google Chrome installer package into the container.  We use the 'curl' command to download the '*.deb' file installer package.  We then save this in the temp directory. 
 ```bash
 lxc exec ubuntu-22-04-python3-11 -- curl -o /tmp/google-installer.deb -L https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
