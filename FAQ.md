@@ -311,8 +311,6 @@ Use "lxc [command] --help" for more information about a command.
 To get the help you need.  
 
 ## How do I build a Python 3.11 GUI Development environment with PySide 6, PySimpleGUI and VS Code
-First make sure LXD is installed and configured properly.  If you have run through the instructions above, you should be able to determine if LXD and any LXD instances are installed, up and running.
-
 After ensuring LXD is installed, you should be able to execute the various scripts in the **/manifest** directories within this repository.  In this specific use-case we are trying to construct a container instance designed for doing Python GUI development using PySimpleGUI or PySide 6.  In this scenario, we also require Python version 3.11 and also require Visual Studio code be installed as the editor.
 
 Note, that when completed, everything will be running within the container.  This includes Visual Studio Code.  It will look like a normal shell environment where you can launch a GUI for the CLI, but just remember that this is running within the LXD container.
@@ -437,3 +435,11 @@ Lets create a symbolic link that will be easier to use.  Instead of typing out '
 ```bash
 lxc exec ubuntu-22-04-python3-11 -- ln -s /usr/bin/google-chrome-stable /usr/bin/chrome
 ```
+
+Now, from *within* the container, start chrome.  It will ask you a few questions the first time it starts up.  One of the questions is regarding setting Chrome as your 'default' browser.  Please select the checkbox so that Chrome is set as your 'default' browser.  This way, any links that are clicked on within a terminal will (hopefully) launch chrome by default.
+
+```bash
+chrome
+```
+
+Chrome should now function as expected.  Remember, this Chrome is running *inside* of the container.  Any and all cookies managed by Chrome will be inside of the container.  Anything Chrome downloads will be stored within the container.  

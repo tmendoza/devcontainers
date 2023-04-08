@@ -103,5 +103,6 @@ lxc exec $ENVNAME -- ln -s /usr/bin/google-chrome-stable /usr/bin/chrome
 
 lxc file push ./python/main-pysimplegui-test.py $ENVNAME/home/ubuntu/
 lxc file push ./python/main-pyside6-test.py $ENVNAME/home/ubuntu/
+lxc file push ./python/main-streamlit-test.py $ENVNAME/home/ubuntu/
 
 lxc exec $ENVNAME --env DISPLAY=:0 --env HOME=/home/ubuntu --user 1000 -- bash --login
