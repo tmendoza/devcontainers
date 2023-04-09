@@ -449,3 +449,223 @@ chrome
 ```
 
 Chrome should open and function as expected.  Remember, this Chrome is running *inside* of the container.  Any and all cookies managed by Chrome will be inside of the container.  Anything Chrome downloads will be stored within the container. 
+
+## How do I install Visual Studio code on my host system?
+Installing Visual Studio code on the host system (not in the container) follows a similar process that we followed when installing VS Code 
+into the container. 
+
+Steps:
+
+1. Open a Terminal window on the host system
+2. Download the Visual Studio code install package directly from Microsoft's site
+3. Install VS Code using the 'apt' command
+4. Cleanup the package in /tmp
+5. Restart terminal Window
+6. Run Visual Studio Code
+
+The VS Code binary package can be installed directly from Microsoft's site.  We will use the 'curl' command to perform the download.
+
+### Open a terminal window on the host system
+First open a terminal window on the host system (laptop or desktop)
+
+### Download the Visual Studio code install package directly from Microsoft's site
+
+Next use the 'curl' command to download the binary installer package 
+
+```bash
+curl -o /tmp/code.deb -L https://go.microsoft.com/fwlink/?LinkID=760868
+```
+
+You should now have a file in the '/tmp' directory on your host system named '/tmp/code.deb'.
+
+### Install VS Code using the 'apt' command
+Within the same open terminal window, run the following command as 'root' using 'sudo'.  By running this command it is assumed that you have 'sudo' permissions. Note, that you may be prompted for your password.  When prompted for your password please enter the same password you entered to login to your machine.
+
+
+```bash
+sudo apt install /tmp/code.deb -y
+```
+
+### Cleanup the package in /tmp
+Now lets delete the '.deb' file in the /tmp directory.
+
+```bash
+rm -f /tmp/code.deb
+```
+### Restart your open terminal window
+Restarting the terminal window you used to do the installation is usually a good idea.  Restarting the terminal window ensure that any 
+configurations or environment variables changed during the VS Code installation process get re-loaded properly into the Terminal window.
+
+This should be as simple as clicking on the 'X' on the Terminal GUI window and then relaunching using whatever means your are comfortable with.
+
+### Run Visual Studio code
+Within the new restarted terminal window, run the following command to start vs code
+
+```bash
+code .
+```
+
+'code' is the actual exzecutable name.  The '.' is a command line argument to vs code telling it which directory to open within Visual Studio 
+code.  In this case, '.' means 'current working directory'.  If you ran this command as the first command you ran after restarting the terminal window, '.' will be your personal home directory.
+
+## How do I backup the file within my container's home directory?
+To move files back and forth from the 'host' to the 'container', or from 'container' to 'host' we need to use the 'lxc file ...' command.
+The 'lxc file ...' command can do the following:
+
+* Delete files from a container
+* Edit files in a container
+* Pull files from a container 
+* Push files to a container
+
+In this scenario, we will be pulling files *from* the container to your home directory on the 'host' machine.  HEre is the help documentation for the lxc file pull command.
+
+```bash
+$ lxc file pull help
+Description:
+  Pull files from instances
+
+Usage:
+  lxc file pull [<remote>:]<instance>/<path> [[<remote>:]<instance>/<path>...] <target path> [flags]
+
+Examples:
+  lxc file pull foo/etc/hosts .
+     To pull /etc/hosts from the instance and write it to the current directory.
+
+Flags:
+  -p, --create-dirs   Create any directories necessary
+  -r, --recursive     Recursively transfer files
+```
+
+In our scenario, we will be copying the entire home directory from *within* your container to a directory on the 'host' system outside of the container.  Here is some information we will need to run the backup process 
+
+* Container Name: 'ubuntu-22-04-python3-11'
+* Container Source Directory: /home/ubuntu
+* Host Temporary Destination Directory: /tmp/backup/ubuntu-22-04-python3-11
+* Host Backup Archive Name: ubuntu-22-04-python3-11-<Year-Month-Day-TimeInSec>.tar.gz 
+
+```bash
+ubuntu-22-04-python3-11-23-04-08-1680997441.tar.gz 
+```
+
+* Host Backup Storage Directory: /home/username/backups/containers/ubuntu-22-04-python3-11/
+
+*Container Name* this is the name of the containers as it shows up in the lxd database.  This can be viewed using the 'lxc list' command
+
+*Container Source Directory* this is the directory we will be backing up.  In this case, we are goi9ng to backup the whole home directory of the 'ubuntu' user.  This way if we need to do a restore of the container, it will be easy to just re-run the container build script and then restore the home directory of the ubuntu user from one of the backups.
+
+*Host Temporary Destination Directory* this is the working directory on the 'host' system.  We will use this directory as a scratch area to copy and archive files.  Once we are done archiving the files we will be deleting this directory as part of a cleanup process.
+
+*Host Backup Archive Name* this is the final name of the backup archive generated as part of the backup process.  This is similar to a 'zip' file.
+
+*Host Backup Storage Directory* this is the final destination on the 'host' machine of any backup archives.  Each backup will have a timestamp in the filename which will indicate when the archive was created.
+
+### Open a Terminal window
+Using whichever process is comfortable to you, please open a terminal window on the 'host' machine.
+
+### Make sure the container you want to backup is up and running
+Use the 'lxc list' command to view any running containers on the host machine
+
+```bash
+lxc list
+```
+
+Assuming you have a running container, you should see something like the following
+
+```bash
++-------------------------+---------+----------------------+------+-----------+-----------+
+|          NAME           |  STATE  |         IPV4         | IPV6 |   TYPE    | SNAPSHOTS |
++-------------------------+---------+----------------------+------+-----------+-----------+
+| ubuntu-22-04-python3-11 | RUNNING | 10.209.29.245 (eth0) |      | CONTAINER | 0         |
++-------------------------+---------+----------------------+------+-----------+-----------+
+```
+
+### Lets create the 'host' directories that will contain the backups
+The following command will create a directory named '$HOME/backups' in your home directory.  This can be changed to whatever you like, but for the sake of demonstration I will continue using '$HOME/backups'
+
+We will also create the 'tmp' directory we will be using for scratch work.
+
+```bash
+mkdir -p $HOME/backups/containers/ubuntu-22-04-python3-11 /tmp/backup/ubuntu-22-04-python3-11
+```
+
+### Now lets run the command to copy files from the container to the host
+This command will copy the home directory from the container to the '/tmp/backup/ubuntu-22-04-python3-11' on the 'host'
+
+```bash
+lxc file pull ubuntu-22-04-python3-11/home/ubuntu /tmp/backup/ubuntu-22-04-python3-11/ -r
+```
+
+Now, from the 'host' if you look at the /tmp/backup/ubuntu-22-04-python3-11 directory you will see a directory named 'ubuntu'
+which contains all of your files in the home directory on the 'container'
+
+```bash
+ls -altr /tmp/backup/ubuntu-22-04-python3-11/ubuntu
+total 40
+drwxrwxr-x 3 tmendoza tmendoza 4096 Apr  8 19:16 ..
+-rwx------ 1 tmendoza tmendoza  112 Apr  8 19:16 .Xauthority
+-rw-rw-r-- 1 tmendoza tmendoza  258 Apr  8 19:16 main-streamlit-test.py
+-rw-r--r-- 1 tmendoza tmendoza  220 Apr  8 19:16 .bash_logout
+-rw------- 1 tmendoza tmendoza   16 Apr  8 19:16 .bash_history
+-rw-r--r-- 1 tmendoza tmendoza  807 Apr  8 19:16 .profile
+-rw-rw-r-- 1 tmendoza tmendoza  506 Apr  8 19:16 main-pysimplegui-test.py
+-rw-r--r-- 1 tmendoza tmendoza 3771 Apr  8 19:16 .bashrc
+-rw-rw-r-- 1 tmendoza tmendoza  612 Apr  8 19:16 main-pyside6-test.py
+drwxr-x--- 2 tmendoza tmendoza 4096 Apr  8 19:16 .
+```
+
+### Now lets run the command to archive the 'ubuntu' directory on the 'host'
+First lets 'cd' over to the temp directory
+
+```bash
+cd /tmp/backup/ubuntu-22-04-python3-11
+```
+
+Now lets archive the entire 'ubuntu' directory and store the archive in '$HOME/backups/containers/ubuntu-22-04-python3-11/'
+
+```bash
+tar -zcvf $HOME/backups/containers/ubuntu-22-04-python3-11/ubuntu-`date '+%y-%m-%d-%s'`.tar.gz ./ubuntu
+```
+
+Now lets 'cd' over to the directory containing the backups and check if the archive file exists
+
+```bash
+cd $HOME/backups/containers/ubuntu-22-04-python3-11/
+```
+
+Lets check to see if the archive file got generated.  We can do this by running the 'ls -l' command
+
+```bash
+ls -l
+```
+
+You should see output that looks like so
+
+```bash
+total 4
+-rw-rw-r-- 1 tmendoza tmendoza 3259 Apr  8 19:24 ubuntu-23-04-08-1680999878.tar.gz
+```
+
+We can also double check to make the files exist inside of the archive.  You can look into the archive and list the contents of the archive without exploding the whole archive.  Run the following command to get a listing of what is inside of the archive
+
+```bash
+tar -ztvf ubuntu-23-04-08-1680999878.tar.gz 
+```
+
+You should see some output that looks like this
+
+```bash
+drwxr-x--- tmendoza/tmendoza 0 2023-04-08 19:16 ./ubuntu/
+-rw-rw-r-- tmendoza/tmendoza 506 2023-04-08 19:16 ./ubuntu/main-pysimplegui-test.py
+-rw-r--r-- tmendoza/tmendoza 3771 2023-04-08 19:16 ./ubuntu/.bashrc
+-rw-r--r-- tmendoza/tmendoza  807 2023-04-08 19:16 ./ubuntu/.profile
+-rw-rw-r-- tmendoza/tmendoza  258 2023-04-08 19:16 ./ubuntu/main-streamlit-test.py
+-rw-rw-r-- tmendoza/tmendoza  612 2023-04-08 19:16 ./ubuntu/main-pyside6-test.py
+-rw-r--r-- tmendoza/tmendoza  220 2023-04-08 19:16 ./ubuntu/.bash_logout
+-rwx------ tmendoza/tmendoza  112 2023-04-08 19:16 ./ubuntu/.Xauthority
+-rw------- tmendoza/tmendoza   16 2023-04-08 19:16 ./ubuntu/.bash_history
+```
+
+You can see that the files on the 'container' are now copied and archived in the '.tar.gz' file.
+
+Note about file extensions on the archive file.  The '*.tar.gz" is a common extension you will see on archive files on Linux systems.  The 'tar' extension stands for tape archive.  The 'gz' extension means GZip.  Together 'tar.gz' means this file is a tape archive compressed using gzip.  
+
