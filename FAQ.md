@@ -24,6 +24,8 @@ Frequenty asked questions for managing LXD containers using the LXC command
   - [How do I build a Python 3.11 GUI Development environment with PySide 6, PySimpleGUI and VS Code](https://github.com/tmendoza/devcontainers/blob/main/FAQ.md#how-do-i-build-a-python-311-gui-development-environment-with-pyside-6-pysimplegui-and-vs-code)
   - [How do you launch Visual Studio Code from inside a container?](https://github.com/tmendoza/devcontainers/blob/main/FAQ.md#how-do-you-launch-visual-studio-code-from-inside-a-container)
   - [How do I install Google Chrome within a container?](https://github.com/tmendoza/devcontainers/blob/main/FAQ.md#how-do-i-install-google-chrome-within-a-container)
+  - [How do I install Visual Studio code on my host system?](https://github.com/tmendoza/devcontainers/blob/main/FAQ.md#how-do-i-install-visual-studio-code-on-my-host-system)
+  - [How do I backup the files within my container's home directory?](https://github.com/tmendoza/devcontainers/blob/main/FAQ.md#how-do-i-backup-the-file-within-my-containers-home-directory)
 
 # Managing Source Code
 ## How do I checkout 'devcontainers' (this one) GitHub repository?
@@ -508,7 +510,7 @@ code .
 'code' is the actual exzecutable name.  The '.' is a command line argument to vs code telling it which directory to open within Visual Studio 
 code.  In this case, '.' means 'current working directory'.  If you ran this command as the first command you ran after restarting the terminal window, '.' will be your personal home directory.
 
-## How do I backup the file within my container's home directory?
+## How do I backup the files within my container's home directory?
 To move files back and forth from the 'host' to the 'container', or from 'container' to 'host' we need to use the 'lxc file ...' command.
 The 'lxc file ...' command can do the following:
 
