@@ -25,7 +25,7 @@ Frequenty asked questions for managing LXD containers using the LXC command
   - [How do you launch Visual Studio Code from inside a container?](https://github.com/tmendoza/devcontainers/blob/main/FAQ.md#how-do-you-launch-visual-studio-code-from-inside-a-container)
   - [How do I install Google Chrome within a container?](https://github.com/tmendoza/devcontainers/blob/main/FAQ.md#how-do-i-install-google-chrome-within-a-container)
   - [How do I install Visual Studio code on my host system?](https://github.com/tmendoza/devcontainers/blob/main/FAQ.md#how-do-i-install-visual-studio-code-on-my-host-system)
-  - [How do I backup the files within my container's home directory?](https://github.com/tmendoza/devcontainers/blob/main/FAQ.md#how-do-i-backup-the-file-within-my-containers-home-directory)
+  - [How do I backup the files within my container's home directory?](https://github.com/tmendoza/devcontainers/blob/main/FAQ.md#how-do-i-backup-the-files-within-my-containers-home-directory)
 
 # Managing Source Code
 ## How do I checkout 'devcontainers' (this one) GitHub repository?
