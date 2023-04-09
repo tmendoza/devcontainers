@@ -671,3 +671,37 @@ You can see that the files on the 'container' are now copied and archived in the
 
 Note about file extensions on the archive file.  The '*.tar.gz" is a common extension you will see on archive files on Linux systems.  The 'tar' extension stands for tape archive.  The 'gz' extension means GZip.  Together 'tar.gz' means this file is a tape archive compressed using gzip.  
 
+### Run the backup script in the '/bin' directory on this repository
+There is an example script in the '/bin' directory name 'simple-backup.sh' which will do a backup of a container.  It basically runs the previous commands outlined above.  It takes as one argument the name of the container instance you want to back up.
+
+```bash
+./simple-backup.sh 
+usage: simple-backup.sh <LXC container name>
+
+example:
+    simple-backup.sh ubuntu-22-04-python3-11
+```
+
+Running this command will provide the following output
+
+```bash
+$HOME/dev/repos/devcontainers/bin/simple-backup.sh ubuntu-22-04-python3-11
+./ubuntu/
+./ubuntu/main-pysimplegui-test.py
+./ubuntu/.bashrc
+./ubuntu/.profile
+./ubuntu/main-streamlit-test.py
+./ubuntu/main-pyside6-test.py
+./ubuntu/.bash_logout
+./ubuntu/.Xauthority
+./ubuntu/.bash_history
+total 24
+-rw-rw-r-- 1 tmendoza tmendoza 3259 Apr  8 19:24 ubuntu-23-04-08-1680999878.tar.gz
+-rw-rw-r-- 1 tmendoza tmendoza 3262 Apr  8 19:51 ubuntu-23-04-08-1681001468.tar.gz
+-rw-rw-r-- 1 tmendoza tmendoza 3262 Apr  8 19:51 ubuntu-23-04-08-1681001517.tar.gz
+-rw-rw-r-- 1 tmendoza tmendoza 3262 Apr  8 19:52 ubuntu-23-04-08-1681001523.tar.gz
+-rw-rw-r-- 1 tmendoza tmendoza 3260 Apr  8 19:52 ubuntu-23-04-08-1681001526.tar.gz
+-rw-rw-r-- 1 tmendoza tmendoza 3262 Apr  8 19:55 ubuntu-23-04-08-1681001709.tar.gz
+```
+
+The final listing of files output from the script, are all of the backup files placed in the '$HOME/backups/containers/ubuntu-22-04-python3-11' backup directory.
