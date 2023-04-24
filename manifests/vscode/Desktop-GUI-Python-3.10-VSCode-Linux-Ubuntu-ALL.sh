@@ -90,6 +90,7 @@ lxc exec $ENVNAME -- apt-get install libcanberra-gtk-module -y
 lxc exec $ENVNAME -- apt-get install software-properties-common -y 
 lxc exec $ENVNAME -- apt-get install gnupg2 -y
 lxc exec $ENVNAME -- apt-get install git -y 
+lxc exec $ENVNAME -- apt-get install mupdf -y 
 
 lxc exec $ENVNAME -- curl -o /tmp/code.deb -L https://go.microsoft.com/fwlink/?LinkID=760868
 lxc exec $ENVNAME -- apt install /tmp/code.deb -y
