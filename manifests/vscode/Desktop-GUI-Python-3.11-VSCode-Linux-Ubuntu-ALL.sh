@@ -96,7 +96,14 @@ lxc exec $ENVNAME -- curl -o /tmp/code.deb -L https://go.microsoft.com/fwlink/?L
 lxc exec $ENVNAME -- apt install /tmp/code.deb -y
 lxc exec $ENVNAME -- rm -f /tmp/code.deb
 
+# Install Google Chrome from the Google repository
+lxc exec $ENVNAME -- curl -o /tmp/google-installer.deb -L https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+lxc exec $ENVNAME -- apt install /tmp/google-installer.deb -y
+lxc exec $ENVNAME -- rm -f /tmp/google-installer.deb
+lxc exec $ENVNAME -- ln -s /usr/bin/google-chrome-stable /usr/bin/chrome
+
 lxc file push ./python/main-pysimplegui-test.py $ENVNAME/home/ubuntu/
 lxc file push ./python/main-pyside6-test.py $ENVNAME/home/ubuntu/
+lxc file push ./python/main-streamlit-test.py $ENVNAME/home/ubuntu/
 
 lxc exec $ENVNAME --env DISPLAY=:0 --env HOME=/home/ubuntu --user 1000 -- bash --login
